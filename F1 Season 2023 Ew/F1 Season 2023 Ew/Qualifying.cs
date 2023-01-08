@@ -4,20 +4,31 @@ namespace F1_Season_2023_Ew
 {
     public static class QGraphics
     {
-        public static void Qlives(int lives)
+        public static string Qlives(int lives)
         {
+            string symblos = " ";
             switch (lives)
             {
+                case 5:
+                    symblos = "♦ ♦ ♦ ♦ ♦ ";
+                    break;
+                case 4:
+                    symblos = "♦ ♦ ♦ ♦ ";
+                    break;
+                case 3:
+                    symblos = "♦ ♦ ♦ ";
+                    break;
                 case 2:
-                    Console.WriteLine("\r♦ ♦  \n");
+                    symblos = "♦ ♦ ";
                     break;
                 case 1:
-                    Console.WriteLine($"{Colors.Teams()[2]}\r♦  \n");
+                    symblos = $"{Colors.Teams()[2]}♦ ";
                     break;
                 case 0:
-                    Console.WriteLine("\r \n");
+                    Console.WriteLine(" ");
                     break;
             }
+            return symblos;
         }
     }
     public static class CircuitKeyLists
@@ -50,7 +61,25 @@ namespace F1_Season_2023_Ew
             double score = 30;
             for (int q = -2; q < 4; q++)
             {
-                int lives = 3;
+                int lives = 0;
+                switch(Menu.Difficulty)
+                {
+                    case 1:
+                        lives = 5;
+                        break;
+                    case 2:
+                        lives = 4;
+                        break;
+                    case 3:
+                        lives = 3;
+                        break;
+                    case 4:
+                        lives = 2;
+                        break;
+                    case 5:
+                        lives = 1;
+                        break;
+                }
                 ConsoleKeyInfo key;
                 Stopwatch stopwatch = new();
                 var currentCircuit = CircuitKeyLists.CircuitKeyList(circuit);
@@ -60,14 +89,14 @@ namespace F1_Season_2023_Ew
                 else
                     Console.WriteLine($"{Colors.White}{Data.CircuitData()[circuit].Item1} Grand Prix 2023 {Colors.Teams()[userTeam]}> {Colors.White}Practice {q + 3}");
                 if (q == 1)
-                    Console.Write($"{Colors.Gray}Press the keys in the right order\n{Colors.Teams()[userTeam]}♦ ♦ ♦ {Colors.Gray}You're allowed 3 mistakes, Press 'Enter' to start");
+                    Console.Write($"{Colors.Gray}Press the keys in the right order\n{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}{Colors.Gray}You're allowed {lives} mistakes, Press 'Enter' to start");
                 else
-                    Console.Write($"{Colors.Teams()[userTeam]}♦ ♦ ♦ {Colors.Gray}Press 'Enter' to start");
+                    Console.Write($"{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}{Colors.Gray}Press 'Enter' to start");
                 do
                 {
                     key = Console.ReadKey(true);
                 } while (key.Key != ConsoleKey.Enter);
-                Console.WriteLine($"\r{Colors.Teams()[userTeam]}♦ ♦ ♦                                                                \n" + Colors.Gray);
+                Console.WriteLine($"\r{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}                                                               \n" + Colors.Gray);
                 for (int i = 0; i < currentCircuit.Count; i++)
                 {
                     Console.Write(currentCircuit[i]);
@@ -93,12 +122,13 @@ namespace F1_Season_2023_Ew
                         do
                         {
                             key = Console.ReadKey(true);
+                            int oldLives = lives; 
                             if (key.Key != currentKey) { lives--; }
-                            if (lives < 3)
+                            if (lives < oldLives)
                             {
                                 Console.SetCursorPosition(0, Console.CursorTop - 2);
                                 Console.Write(Colors.Teams()[userTeam]);
-                                QGraphics.Qlives(lives);
+                                Console.WriteLine('\r' + QGraphics.Qlives(lives) + " \n");
                             }
                             if (lives == 0) { break; }
                         } while (key.Key != currentKey);
