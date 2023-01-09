@@ -982,45 +982,44 @@ namespace F1_Season_2023_Ew
     }
     public class LineupGenerator
     {
-        public static List<KeyValuePair<int, double>> StartingLineup(int user, double qualification)
+        public static List<KeyValuePair<int, double>> StartingLineup(int user, int qualification)
         {
             var driver = Data.DriverData();
             Random rnd = new();
-            bool escape;
+            int userKey = 0;
             double startRndDouble;
             int startRnd;
             List<KeyValuePair<int, double>> lineup = new() { };
             do
             {
-                do
+                for (int i = 0; i < Data.DriverData().Count; i++)
                 {
-                    escape = true;
-                    for (int i = 0; i < Data.DriverData().Count; i++)
-                    {
-                        startRndDouble = rnd.NextDouble();
-                        startRnd = rnd.Next(10);
-                        if (i == user)
-                            lineup.Add(new KeyValuePair<int, double>(driver[i].Item4, qualification));
-                        else
-                        {
-                            lineup.Add(new KeyValuePair<int, double>(driver[i].Item4, startRnd + driver[i].Item6 - startRndDouble));
-                        }
+                    startRndDouble = rnd.NextDouble();
+                    startRnd = rnd.Next(10);
+                    if (i == user)
+                    { 
+                        lineup.Add(new KeyValuePair<int, double>(driver[i].Item4, qualification));
+                        userKey = driver[i].Item4;
                     }
-                    lineup.Sort((x, y) => x.Value.CompareTo(y.Value));
-                    if (qualification == 18.8 && lineup[14].Value != qualification)
-                    {
-                        lineup.Clear();
-                        escape = false;
-                    }
-                    else if (qualification == 14.5 && lineup[9].Value != qualification)
-                    {
-                        lineup.Clear();
-                        escape = false;
-                    }
-                } while (escape == false);
+                    else
+                        lineup.Add(new KeyValuePair<int, double>(driver[i].Item4, startRnd + driver[i].Item6 - startRndDouble));
+                }
             } while (lineup.Count != lineup.Distinct().Count());
+            lineup.Sort((x, y) => x.Value.CompareTo(y.Value));
+            for (int i = 0; i < Data.DriverData().Count; i++)
+            {
+                if (lineup[i].Key == userKey)
+                {
+                    var item = lineup[i];
+                    lineup.RemoveAt(i);
+                    if (qualification > i)
+                        qualification--;
+                    lineup.Insert(qualification, item);
+                    break;
+                }
+            }
             return lineup;
-        }
+        }   
     }
     public class Colors
     {
@@ -1032,10 +1031,11 @@ namespace F1_Season_2023_Ew
         }
         public static string Gray = "\x1b[38;5;245m";
         public static string White = "\x1b[38;5;255m";
+        public static string Purple = "\x1b[38;2;213;0;222m";
     }
-    public class QPlaOrSkip
+    public class QPlayOrSkip
     {
-        public static double PlayOrSkipQ(int circuit, int userTeam)
+        public static int PlayOrSkipQ(int circuit, int userTeam)
         {
             Console.Clear();
             ConsoleKeyInfo key;
@@ -1060,7 +1060,7 @@ namespace F1_Season_2023_Ew
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
             } while (key.Key != ConsoleKey.Enter);
             Console.Clear();    
-            double qualifying;
+            int qualifying;
             if (selectedOption)
             {
                 qualifying = Qualifying.Qualification(userTeam, circuit);
@@ -1068,10 +1068,8 @@ namespace F1_Season_2023_Ew
             else
             {
                 Random rnd = new();
-                double startRndDouble = rnd.NextDouble();
-                int startRnd = rnd.Next(10);
-                double userNumber = rnd.Next(20);
-                qualifying = startRnd + userNumber - startRndDouble;
+                int startRnd = rnd.Next(20);
+                qualifying = startRnd;
             }
             return qualifying;
         }
@@ -1084,7 +1082,7 @@ namespace F1_Season_2023_Ew
             ConsoleKeyInfo key;
             int circuit = CircuitSelector.CircuitListing();
             var userChoice = TeamSelector.TeamListing();
-            double qualifying = QPlaOrSkip.PlayOrSkipQ(circuit, userChoice[0].Item1 / 2);
+            int qualifying = QPlayOrSkip.PlayOrSkipQ(circuit, userChoice[0].Item1 / 2);
             var startingLineup = LineupGenerator.StartingLineup(userChoice[0].Item1, qualifying);
             string userTeamColor = Colors.Teams()[userChoice[0].Item1/2];
             int selPreRace = 1;

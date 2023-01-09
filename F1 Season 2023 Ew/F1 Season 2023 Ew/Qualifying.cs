@@ -56,42 +56,32 @@ namespace F1_Season_2023_Ew
     }
     public static class Qualifying
     {
-        public static double Qualification(int userTeam, int circuit)
+        public static int Qualification(int userTeam, int circuit)
         {
-            double score = 30;
+            int score = 20;
             for (int q = -2; q < 4; q++)
             {
-                int lives = 0;
-                switch(Menu.Difficulty)
-                {
-                    case 1:
-                        lives = 5;
-                        break;
-                    case 2:
-                        lives = 4;
-                        break;
-                    case 3:
-                        lives = 3;
-                        break;
-                    case 4:
-                        lives = 2;
-                        break;
-                    case 5:
-                        lives = 1;
-                        break;
-                }
+                int lives = 6 - Menu.Difficulty;
                 ConsoleKeyInfo key;
                 Stopwatch stopwatch = new();
                 var currentCircuit = CircuitKeyLists.CircuitKeyList(circuit);
                 Console.Clear();
+                Console.Write($"{Colors.White}{Data.CircuitData()[circuit].Item1} Grand Prix 2023 {Colors.Teams()[userTeam]}> {Colors.White}");
                 if (q > 0)
-                    Console.WriteLine($"{Colors.White}{Data.CircuitData()[circuit].Item1} Grand Prix 2023 {Colors.Teams()[userTeam]}> {Colors.White}Q{q}");
+                    Console.WriteLine($"Q{q}"); 
                 else
-                    Console.WriteLine($"{Colors.White}{Data.CircuitData()[circuit].Item1} Grand Prix 2023 {Colors.Teams()[userTeam]}> {Colors.White}Practice {q + 3}");
-                if (q == 1)
-                    Console.Write($"{Colors.Gray}Press the keys in the right order\n{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}{Colors.Gray}You're allowed {lives} mistakes, Press 'Enter' to start");
+                    Console.WriteLine($"Practice {q + 3}");
+                if (q == 1 || q == -2)
+                {
+                    Console.Write($"{Colors.Gray}Press the keys in the right order\n{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}{Colors.Gray}You have {lives} ");
+                    if (lives == 1)
+                        Console.Write("life, ");
+                    else
+                        Console.Write("lives, ");
+                }
                 else
-                    Console.Write($"{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}{Colors.Gray}Press 'Enter' to start");
+                    Console.Write(Colors.Teams()[userTeam] + QGraphics.Qlives(lives) + Colors.Gray);
+                Console.Write("Press 'Enter' to start");
                 do
                 {
                     key = Console.ReadKey(true);
@@ -142,93 +132,101 @@ namespace F1_Season_2023_Ew
                     stopwatch.Stop();
                 }
                 if (stopwatch.IsRunning) { stopwatch.Stop(); }
+                double time = stopwatch.ElapsedMilliseconds;
+                double multi = currentCircuit.Count / (time/1000);
                 if (q > 0)
                 {
-                    score = stopwatch.ElapsedMilliseconds;
                     if (lives == 0)
                     {
-                        Console.WriteLine($"\n\n{Colors.Teams()[2]}Shunt! {Colors.White}Better luck next time\n" + Colors.Gray + "Press 'Enter' to continue");
+                        Console.WriteLine($"\n\n{Colors.Teams()[2]}Shunt! {Colors.White}You're out\n" + Colors.Gray + "Press 'Enter' to continue");
                         do
                         {
                             key = Console.ReadKey(true);
                         } while (key.Key != ConsoleKey.Enter);
                         if (q == 1)
-                            score = 30;
+                            score = 19;
                         else if (q == 2)
-                            score = 18.8;
+                            score = 14;
                         else
-                            score = 14.5;
+                            score = 9;
                         break;
                     }
-                    else if (score < (2300 + currentCircuit.Count * 25) - q * 5)
+                    else if (multi > 6.6 + q * 0.1)
                     {
-                        Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.Write("\n\nScore: " + score / 475);
-                        Console.SetCursorPosition(12, Console.CursorTop);
-                        Console.WriteLine(" - Perfect Lap!  " + Colors.White);
+                        Console.WriteLine(Colors.Purple + "\n\nTime: " + time / 1000 + " - Perfect Lap!  " + Colors.White);
                         if (q < 3)
                             Console.WriteLine("You're through to the next round");
                         else
                             Console.WriteLine(Colors.Teams()[userTeam] + "You're on Pole!");
-                        score = score / 3000;
+                        score = 0;
                     }
-                    else if (score < (3000 + currentCircuit.Count * 25) - q * 10)
+                    else if (multi > 5.6 + q * 0.1)
                     {
-                        Console.Write("\n\nScore: " + Colors.Teams()[userTeam] + score / 475);
-                        Console.SetCursorPosition(12, Console.CursorTop);
-                        Console.WriteLine(" - Great Lap!    " + Colors.White);
+                        Console.WriteLine("\n\nTime: " + Colors.Teams()[userTeam] + time / 1000 + " - Great Lap!    " + Colors.White);
                         if (q < 3)
                             Console.WriteLine("You're through to the next round");
                         else
                             Console.WriteLine("Lets check the results");
-                        score = score / 475;
+                        if (multi > 6.4)
+                            score = 1;
+                        else if (multi > 6.2)
+                            score = 2;
+                        else if (multi > 5.9)
+                            score = 3;
+                        else if (multi > 5.6)
+                            score = 4;
                     }
-                    else if (stopwatch.ElapsedMilliseconds < (4200 + currentCircuit.Count * 25) - q * 20)
+                    else if (multi > 4.4 + q * 0.1)
                     {
-                        Console.Write("\n\nScore: " + Colors.Teams()[userTeam] + score / 475);
-                        Console.SetCursorPosition(12, Console.CursorTop);
-                        Console.WriteLine(" - Good Lap      " + Colors.White);
+                        Console.WriteLine("\n\nTime: " + Colors.Teams()[userTeam] + time / 1000 + " - Good Lap      " + Colors.White);
                         if (q < 3)
                             Console.WriteLine("You're through to the next round");
                         else
                             Console.WriteLine("Lets check the results");
-                        score = score / 475;
+                        if (multi > 5.6)
+                            score = 4;
+                        else if (multi > 5.2)
+                            score = 5;
+                        else if (multi > 4.8)
+                            score = 6;
+                        else if (multi > 4.4)
+                            score = 7;
                     }
-                    else if (stopwatch.ElapsedMilliseconds < (7000 + currentCircuit.Count * 25) - q * 600)
+                    else if (multi > 3.9 + q * 0.1)
                     {
-                        Console.Write(Colors.White + "\n\nScore: " + score / 475);
-                        Console.SetCursorPosition(12, Console.CursorTop);
+                        Console.Write(Colors.White + "\n\nTime: " + time / 1000);
                         if (q < 3)
                             Console.WriteLine(" - Just enough   \nYou're through to the next round");
                         else
                             Console.WriteLine(" - Ok            \nLets check the results");
-                        score = score / 475;
+                        if (multi > 4.4)
+                            score = 7;
+                        else if (multi > 3.9)
+                            score = 8;
                     }
-                    else if (stopwatch.ElapsedMilliseconds < 10000)
+                    else if (multi > 3 + q * 0.1)
                     {
-                        Console.Write(Colors.White + "\n\nScore: " + Colors.Teams()[2] + score / 475 + Colors.White);
-                        Console.SetCursorPosition(12, Console.CursorTop);
+                        Console.Write(Colors.White + "\n\nTime: " + Colors.Teams()[2] + time / 1000 + Colors.White);
                         if (q < 3)
                             Console.WriteLine(" - Not enough    \nYou're eliminated");
                         else
-                            Console.WriteLine(" - Subpar         \nLets check the results");
+                            Console.WriteLine(" - Subpar        \nLets check the results");
                         Console.Write(Colors.Gray + "Press 'Enter' to continue");
                         do
                         {
                             key = Console.ReadKey(true);
                         } while (key.Key != ConsoleKey.Enter);
                         if (q == 1)
-                            score = 27;
-                        else if (q == 2)
                             score = 19;
+                        else if (q == 2)
+                            score = 14;
                         else
-                            score = 14.5;
+                            score = 9;
                         break;
                     }
-                    else if (stopwatch.Elapsed.Seconds < 20)
+                    else if (multi > 1 + q * 0.1)
                     {
-                        Console.Write(Colors.White + "\n\nScore: " + Colors.Teams()[2] + score / 475);
-                        Console.SetCursorPosition(12, Console.CursorTop);
+                        Console.Write(Colors.White + "\n\nTime: " + Colors.Teams()[2] + time / 1000);
                         if (q < 3)
                             Console.WriteLine(" - Bad       \nYou're eliminated");
                         else
@@ -239,11 +237,11 @@ namespace F1_Season_2023_Ew
                             key = Console.ReadKey(true);
                         } while (key.Key != ConsoleKey.Enter);
                         if (q == 1)
-                            score = 30;
-                        else if (q == 2)
                             score = 19;
+                        else if (q == 2)
+                            score = 14;
                         else
-                            score = 14.5;
+                            score = 9;
                         break;
                     }
                     else
@@ -254,11 +252,11 @@ namespace F1_Season_2023_Ew
                             key = Console.ReadKey(true);
                         } while (key.Key != ConsoleKey.Enter);
                         if (q == 1)
-                            score = 30;
-                        else if (q == 2)
                             score = 19;
+                        else if (q == 2)
+                            score = 14;
                         else
-                            score = 14.5;
+                            score = 9;
                         break;
                     }
                     Console.Write(Colors.Gray + "Press 'Enter' to continue");
