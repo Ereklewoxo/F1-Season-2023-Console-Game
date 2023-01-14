@@ -1119,8 +1119,8 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                 Task.Delay(2).Wait();
             }
             Console.SetCursorPosition(0, Console.CursorTop - -12);
-            Console.WriteLine(W + "                    < Length - 6.00KM >                                              \n" +
-                              P + "\n        Lap record" + W + " - 1:43.009 Charles Leclerc (2019)");
+            Console.WriteLine(W + "                        < Length - 6.00KM >                                              \n" +
+                              P + "\n            Lap record" + W + " - 1:43.009 Charles Leclerc (2019)");
             Console.SetCursorPosition(0, Console.CursorTop - 3);
             do
             {
@@ -1148,7 +1148,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n F1            F1F1F1F" +
                             $"\n   F1      F1F1F" +
                             $"\n     F1F1F1\n");
-                        Console.WriteLine(W + "                    < Length - 6.00KM >                                          ");
+                        Console.WriteLine(W + "                        < Length - 6.00KM >                                          ");
                         break;
                     case 1:
                         Console.SetCursorPosition(0, Console.CursorTop - 12);
@@ -1163,7 +1163,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n F1            F1F1F1F" +
                             $"\n   F1      F1F1F" +
                             $"\n     F1F1F1\n");
-                        Console.WriteLine(W + "                     < " + G + "DRS " + W + "Zones - 2 >                 ");
+                        Console.WriteLine(W + "                         < " + G + "DRS " + W + "Zones - 2 >                 ");
                         break;
                     case 2:
                         Console.SetCursorPosition(0, Console.CursorTop - 12);
@@ -1178,7 +1178,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n{N} F1            F1F1F1F" +
                             $"\n   F1      F1F1F" +
                             $"\n     F1F1F1\n");
-                        Console.WriteLine(W + "                       < " + R + "Sector 1" + W + " >                      ");
+                        Console.WriteLine(W + "                           < " + R + "Sector 1" + W + " >                      ");
                         break;
                     case 3:
                         Console.SetCursorPosition(0, Console.CursorTop - 12);
@@ -1193,7 +1193,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n{B} F1{N}            F1F1F1F" +
                             $"\n{B}   F1{N}      F1F1F" +
                             $"\n     F1F1F1\n");
-                        Console.WriteLine(W + "                       < " + B + "Sector 2" + W + " >                     ");
+                        Console.WriteLine(W + "                           < " + B + "Sector 2" + W + " >                     ");
                         break;
                     case 4:
                         Console.SetCursorPosition(0, Console.CursorTop - 12);
@@ -1208,7 +1208,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n F1{Y}            F1F1F1F" +
                             $"\n{N}   F1{Y}      F1F1F" +
                             $"\n     F1F1F1\n");
-                        Console.WriteLine(W + "                       < " + Y + "Sector 3" + W + " >                   ");
+                        Console.WriteLine(W + "                           < " + Y + "Sector 3" + W + " >                   ");
                         break;
                 }
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
@@ -2194,30 +2194,30 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                 Console.Write($"\x1b[38;5;{234 + (17 - i)}m");
                 string pad = "".PadLeft(i);
                 Console.WriteLine("" +
-                      "  F1F1 " +
-                    "\n F1  F1                                       F1F1 " +
-                    "\n F1   F1                                    F1    F1 " +
-                    "\n F1    F1                                 F1       F1 " +
-                    "\n F1    F1                                F1        F1 " +
-                    "\n F1    F1                 HUNGRAY-F1F1F1F1         F1 " +
-                    "\n F1    F1      F1F1F1F1F1F1                       F1 " +
-                    "\n F1    F1     F1                                 F1 " +
-                    "\n T1    F1    F1                              F1F1F " +
-                    "\n R1     F1F1F1                             F1F " +
-                    "\n A1                                       F1 " +
-                    "\n T1                                        F1 " +
-                    "\n S1                                         F1 " +
-                    "\n F1     F1F1F                              F1 " +
-                    "\n F1    F1   F1                        F1F1F1 " +
-                    "\n F1    F1  F1                      F1F1 " +
-                    "\n F1    F1  F1                     F1 " +
-                    "\n  F1F1F1   F1F1-70-LAPS-14-TURNS-F1 ");
+                      $"{pad}  F1F1 " + pad +
+                    $"\n{pad} F1  F1                                       F1F1 " + pad +
+                    $"\n{pad} F1   F1                                    F1    F1 " + pad +
+                    $"\n{pad} F1    F1                                 F1       F1 " + pad +
+                    $"\n{pad} F1    F1                                F1        F1 " + pad +
+                    $"\n{pad} F1    F1                 HUNGRAY-F1F1F1F1         F1 " + pad +
+                    $"\n{pad} F1    F1      F1F1F1F1F1F1                       F1 " + pad +
+                    $"\n{pad} F1    F1     F1                                 F1 " + pad +
+                    $"\n{pad} T1    F1    F1                              F1F1F " + pad +
+                    $"\n{pad} R1     F1F1F1                             F1F " + pad +
+                    $"\n{pad} A1                                       F1 " + pad +
+                    $"\n{pad} T1                                        F1 " + pad +
+                    $"\n{pad} S1                                         F1 " + pad +
+                    $"\n{pad} F1     F1F1F                              F1 " + pad +
+                    $"\n{pad} F1    F1   F1                        F1F1F1 " + pad +
+                    $"\n{pad} F1    F1  F1                      F1F1 " + pad +
+                    $"\n{pad} F1    F1  F1                     F1 " + pad +
+                    $"\n{pad}  F1F1F1   F1F1-70-LAPS-14-TURNS-F1 " + pad);
                 Console.SetCursorPosition(0, Console.CursorTop - 18);
                 Task.Delay(2).Wait();
             }
             Console.SetCursorPosition(0, Console.CursorTop - -19);
-            Console.WriteLine(W + "                    < Length - 4.38KM >                                              \n" +
-                              P + "\n        Lap record" + W + " - 1:16.627 Lewis Hamilton (2020)");
+            Console.WriteLine(W + "               < Length - 4.38KM >                                              \n" +
+                              P + "\n   Lap record" + W + " - 1:16.627 Lewis Hamilton (2020)");
             Console.SetCursorPosition(0, Console.CursorTop - 3);
             do
             {
@@ -2253,7 +2253,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             "\n F1    F1  F1                      F1F1 " +
                             "\n F1    F1  F1                     F1 " +
                             "\n  F1F1F1   F1F1-70-LAPS-14-TURNS-F1 \n");
-                        Console.WriteLine(W + "                    < Length - 6.17KM >                                          ");
+                        Console.WriteLine(W + "               < Length - 4.38KM >                                          ");
                         break;
                     case 1:
                         Console.SetCursorPosition(0, Console.CursorTop - 19);
@@ -2276,7 +2276,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n {G}F1{N}    F1  F1                      F1F1 " +
                             $"\n {G}F1{N}   ({G}DZ{N}) F1                     F1 " +
                             $"\n  F1F1F1   F1F1-70-LAPS-14-TURNS-F1 \n");
-                        Console.WriteLine(W + "                     < " + G + "DRS " + W + "Zones - 2 >                 ");
+                        Console.WriteLine(W + "                < " + G + "DRS " + W + "Zones - 2 >                 ");
                         break;
                     case 2:
                         Console.SetCursorPosition(0, Console.CursorTop - 19);
@@ -2299,7 +2299,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n F1    F1  F1                      F1F1 " +
                             $"\n F1    F1  F1                     F1 " +
                             $"\n  F1F1F1   F1F1-70-LAPS-14-TURNS-F1 \n");
-                        Console.WriteLine(W + "                       < " + R + "Sector 1" + W + " >                      ");
+                        Console.WriteLine(W + "                  < " + R + "Sector 1" + W + " >                      ");
                         break;
                     case 3:
                         Console.SetCursorPosition(0, Console.CursorTop - 19);
@@ -2322,7 +2322,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n F1    F1  F1                      {B}F1F1{N} " +
                             $"\n F1    F1  F1                     {B}F1{N} " +
                             $"\n  F1F1F1   F1F1-70-LAPS-14-{B}TURNS-F1{N} \n");
-                        Console.WriteLine(W + "                       < " + B + "Sector 2" + W + " >                     ");
+                        Console.WriteLine(W + "                  < " + B + "Sector 2" + W + " >                     ");
                         break;
                     case 4:
                         Console.SetCursorPosition(0, Console.CursorTop - 19);
@@ -2345,7 +2345,7 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
                             $"\n{Y} F1    F1  F1{N}                      F1F1 " +
                             $"\n{Y} F1    F1  F1{N}                     F1 " +
                             $"\n{Y}  F1F1F1   F1F1-70-LAPS-14-{N}TURNS-F1 \n");
-                        Console.WriteLine(W + "                       < " + Y + "Sector 3" + W + " >                   ");
+                        Console.WriteLine(W + "                  < " + Y + "Sector 3" + W + " >                   ");
                         break;
                 }
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
@@ -2353,60 +2353,281 @@ $"\n{N}   F1F1F1-57-LAPS-15-TURNS-F1F1F1F1F1START{Y}1F1F1F1F1F1F1F1 \n");
         }
         public static void Brazil()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("" +
-                          "\n                     F1F1F1F-BRAZILI-F1F1F1" +
-                          "\n                  F1F                F1F   F1" +
-                          "\n               F1F      F1F1F1    F1F  F1    F1" +
-                          "\n           START     F1F1   F1  F1F   F1F      F1" +
-                          "\n         F1F        F1       F1F1   F1          F1" +
-                          "\n      F1F           F1F            F1           F1" +
-                          "\n   F1F                 F1F1F         F1F1F      F1" +
-                          "\n F1F                        F1F1F1F       F1F1F1" +
-                          "\n  F1F                             F1F1" +
-                          "\n   F1                                 F1" +
-                          "\n   F1                                  F1" +
-                          "\n    F1                                F1" +
-                          "\n      F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("\nLength - 4.31KM");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write("  Lap record");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(" - 1:10.540 Valtteri Bottas (2018)");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("  DRS ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Zones - 2                                                ");
+            ConsoleKeyInfo key;
+            SelMap = 0;
+            for (int i = 17; i > -1; --i)
+            {
+                Console.Write($"\x1b[38;5;{234 + (17 - i)}m");
+                string pad = "".PadLeft(i);
+                Console.WriteLine("" +
+                              $"\n{pad}                     F1F1F1F-BRAZILI-F1F1F1 " + pad +
+                              $"\n{pad}                  F1F                F1F   F1 " + pad +
+                              $"\n{pad}               F1F      F1F1F1    F1F  F1    F1 " + pad +
+                              $"\n{pad}           START     F1F1   F1  F1F   F1F      F1 " + pad +
+                              $"\n{pad}         F1F        F1       F1F1   F1          F1 " + pad +
+                              $"\n{pad}      F1F           F1F            F1           F1 " + pad +
+                              $"\n{pad}   F1F                 F1F1F         F1F1F      F1 " + pad +
+                              $"\n{pad} F1F                        F1F1F1F       F1F1F1 " + pad +
+                              $"\n{pad}  F1F                             F1F1 " + pad +
+                              $"\n{pad}   F1                                 F1 " + pad +
+                              $"\n{pad}   F1                                  F1 " + pad +
+                              $"\n{pad}    F1                                F1 " + pad +
+                              $"\n{pad}      F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1 " + pad);
+                Console.SetCursorPosition(0, Console.CursorTop - 14);
+                Task.Delay(2).Wait();
+            }
+            Console.SetCursorPosition(0, Console.CursorTop + 15);
+            Console.WriteLine(W + "               < Length - 4.31KM >                                              \n" +
+                              P + "\n   Lap record" + W + " - 1:10.540 Valtteri Bottas (2018)");
+            Console.SetCursorPosition(0, Console.CursorTop - 3);
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.LeftArrow && SelMap == 0)
+                    SelMap = 4;
+                else if (key.Key == ConsoleKey.LeftArrow && SelMap != 0)
+                    SelMap--;
+                else if (key.Key == ConsoleKey.RightArrow && SelMap == 4)
+                    SelMap = 0;
+                else if (key.Key == ConsoleKey.RightArrow && SelMap != 4)
+                    SelMap++;
+                switch (SelMap)
+                {
+                    case 0:
+                        Console.SetCursorPosition(0, Console.CursorTop - 15);
+                        Console.WriteLine("" + N +
+                                      $"\n                     F1F1F1F-BRAZILI-F1F1F1" +
+                                      $"\n                  F1F                F1F   F1" +
+                                      $"\n               F1F      F1F1F1    F1F  F1    F1" +
+                                      $"\n           START     F1F1   F1  F1F   F1F      F1 " +
+                                      $"\n         F1F        F1       F1F1   F1          F1" +
+                                      $"\n      F1F           F1F            F1           F1" +
+                                      $"\n   F1F                 F1F1F         F1F1F      F1" +
+                                      $"\n F1F                        F1F1F1F       F1F1F1" +
+                                      $"\n  F1F                             F1F1" +
+                                      $"\n   F1                                 F1" +
+                                      $"\n   F1                                  F1" +
+                                      $"\n    F1                                F1" +
+                                      $"\n      F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
+                        Console.WriteLine(W + "               < Length - 4.31KM >                                          ");
+                        break;
+                    case 1:
+                        Console.SetCursorPosition(0, Console.CursorTop - 15);
+                        Console.WriteLine("" + G +
+                                      $"\n                     F1F1F1F{N}-BRAZILI-F1F1F1{G}" +
+                                      $"\n                  F1F{N}                F1F   F1{G}" +
+                                      $"\n               F1F{N}      F1F1F1    F1F  F1    F1{G}" +
+                                      $"\n           START{N}     F1F1   F1  F1F   F1F     ({G}DZ{N}){G}" +
+                                      $"\n         F1F{N}        F1       F1F1   F1          F1{G}" +
+                                      $"\n      F1F{N}           F1F            F1           F1{G}" +
+                                      $"\n   F1F{N}                 F1F1F         F1F1F      F1" +
+                                      $"\n F1F                        F1F1F1F       F1F1F1" +
+                                      $"\n ({G}DZ{N})                             F1F1" +
+                                      $"\n   F1                                 F1" +
+                                      $"\n   F1                                  F1" +
+                                      $"\n    F1                                F1" +
+                                      $"\n      F1F{G}1F1F-71-LAPS-15-TURNS-F1F1F1{N}F1\n");
+                        Console.WriteLine(W + "                < " + G + "DRS " + W + "Zones - 2 >                 ");
+                        break;
+                    case 2:
+                        Console.SetCursorPosition(0, Console.CursorTop - 15);
+                        Console.WriteLine("" + N +
+                                      $"\n                     F1F1F1F-BRAZILI-F1F1F1" +
+                                      $"\n                  F1F                F1F   F1" +
+                                      $"\n               F1F      F1F1F1    F1F  F1    F1{R}" +
+                                      $"\n           START{N}     F1F1   F1  F1F   F1F      F1{R} " +
+                                      $"\n         F1F{N}        F1       F1F1   F1          F1{R}" +
+                                      $"\n      F1F{N}           F1F            F1           F1{R}" +
+                                      $"\n   F1F{N}                 F1F1F         F1F1F      F1{R}" +
+                                      $"\n F1F{N}                        F1F1F1F       F1F1F1{R}" +
+                                      $"\n  F1F{N}                             F1F1{R}" +
+                                      $"\n   F1{N}                                 F1{R}" +
+                                      $"\n   F1{N}                                  F1{R}" +
+                                      $"\n    F1{N}                                F1{R}" +
+                                      $"\n      F1F1F1F-71-LAPS-15-TURNS-F1F{N}1F1F1\n");
+                        Console.WriteLine(W + "                  < " + R + "Sector 1" + W + " >                      ");
+                        break;
+                    case 3:
+                        Console.SetCursorPosition(0, Console.CursorTop - 15);
+                        Console.WriteLine("" + N +
+                                      $"\n                     F1F1F1F-BRAZILI-F1F1F1" +
+                                      $"\n                  F1F                {B}F1F{N}   F1" +
+                                      $"\n               F1F      {B}F1F1F1    F1F  F1{N}    F1" +
+                                      $"\n           START     {B}F1F1   F1  F1F   F1F{N}      F1" +
+                                      $"\n         F1F        {B}F1       F1F1   F1{N}          F1" +
+                                      $"\n      F1F           {B}F1F            F1{N}           F1" +
+                                      $"\n   F1F                 {B}F1F1F         F1F1F{N}      F1" +
+                                      $"\n F1F                        {B}F1F1F1F{N}       F1F1F1" +
+                                      $"\n  F1F                             {B}F1F1{N}" +
+                                      $"\n   F1                                 {B}F1{N}" +
+                                      $"\n   F1                                  {B}F1{N}" +
+                                      $"\n    F1                                {B}F1{N}" +
+                                      $"\n      F1F1F1F-71-LAPS-15-TURNS-F1F{B}1F1F1\n");
+                        Console.WriteLine(W + "                  < " + B + "Sector 2" + W + " >                     ");
+                        break;
+                    case 4:
+                        Console.SetCursorPosition(0, Console.CursorTop - 15);
+                        Console.WriteLine("" + Y +
+                                      $"\n                     F1F1F1F-BRAZILI-F1F1F1" +
+                                      $"\n                  F1F{N}                F1F   {Y}F1{N}" +
+                                      $"\n               {Y}F1F{N}      F1F1F1    F1F  F1    {Y}F1{N}" +
+                                      $"\n           START     F1F1   F1  F1F   F1F      {Y}F1{N}" +
+                                      $"\n         F1F        F1       F1F1   F1          {Y}F1{N}" +
+                                      $"\n      F1F           F1F            F1           {Y}F1{N}" +
+                                      $"\n   F1F                 F1F1F         F1F1F      {Y}F1{N}" +
+                                      $"\n F1F                        F1F1F1F       {Y}F1F1F1{N}" +
+                                      $"\n  F1F                             F1F1" +
+                                      $"\n   F1                                 F1" +
+                                      $"\n   F1                                  F1" +
+                                      $"\n    F1                                F1" +
+                                      $"\n      F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
+                        Console.WriteLine(W + "                  < " + Y + "Sector 3" + W + " >                   ");
+                        break;
+                }
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+            } while (key.Key != ConsoleKey.Escape);
         }
         public static void AbuDhabi()
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("" +
-                "\n                               F1F1" +
-                "\n                               F1 F1F1F1" +
-                "\n                      ABU-DHABI       F1F1F1" +
-                "\n                   F1F1         F1F1F1F    F1F1F1" +
-                "\n                F1F1       F1F1F1    F1          F1F1F1" +
-                "\n              F1F          F1        S1               F1F1F1" +
-                "\n            F1F F1F1F1     F1        T1                    F1F1F1" +
-                "\n         F1F F1F     F1    F1        A1                         F1F1F1" +
-                "\n       F1F F1F       F1    F1        R1                              F1F1F1" +
-                "\n     F1F  F1          F1F1F1         T1              F1F1F1               F1F1F1" +
-                "\n    F1    F1                         F1            F1F    F-16-TURNS-1         F1" +
-                "\n  F1F    F1                          F1           F1                  F1F1F1F1F1" +
-                "\n F1F    F1F                           F1-58-LAPS-F1" +
-                "\n   F1F1F1");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("\nLength - 5.28KM");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write("  Lap record");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(" - 1:26.103 Max Verstappen (2021)");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("  DRS ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Zones - 2                                  ");
+            ConsoleKeyInfo key;
+            SelMap = 0;
+            for (int i = 17; i > -1; --i)
+            {
+                Console.Write($"\x1b[38;5;{234 + (17 - i)}m");
+                string pad = "".PadLeft(i);
+                Console.WriteLine("" +
+                $"\n{pad}                               F1F1 " + pad +
+                $"\n{pad}                               F1 F1F1F1 " + pad +
+                $"\n{pad}                      ABU-DHABI       F1F1F1 " + pad +
+                $"\n{pad}                   F1F1         F1F1F1F    F1F1F1 " + pad +
+                $"\n{pad}                F1F1       F1F1F1    F1          F1F1F1 " + pad +
+                $"\n{pad}              F1F          F1        S1               F1F1F1 " + pad +
+                $"\n{pad}            F1F F1F1F1     F1        T1                    F1F1F1 " + pad +
+                $"\n{pad}         F1F F1F     F1    F1        A1                         F1F1F1 " + pad +
+                $"\n{pad}       F1F F1F       F1    F1        R1                              F1F1F1 " + pad +
+                $"\n{pad}     F1F  F1          F1F1F1         T1              F1F1F1               F1F1F1 " + pad +
+                $"\n{pad}    F1    F1                         F1            F1F    F-16-TURNS-1         F1 " + pad +
+                $"\n{pad}  F1F    F1                          F1           F1                  F1F1F1F1F1 " + pad +
+                $"\n{pad} F1F    F1F                           F1-58-LAPS-F1 " + pad +
+                $"\n{pad}   F1F1F1 " + pad);
+                Console.SetCursorPosition(0, Console.CursorTop - 15);
+                Task.Delay(2).Wait();
+            }
+            Console.SetCursorPosition(0, Console.CursorTop + 16);
+            Console.WriteLine(W + "                    < Length - 5.28KM >                                              \n" +
+                              P + "\n        Lap record" + W + " - 1:26.103 Max Verstappen (2021)");
+            Console.SetCursorPosition(0, Console.CursorTop - 3);
+            do
+            {
+                key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.LeftArrow && SelMap == 0)
+                    SelMap = 4;
+                else if (key.Key == ConsoleKey.LeftArrow && SelMap != 0)
+                    SelMap--;
+                else if (key.Key == ConsoleKey.RightArrow && SelMap == 4)
+                    SelMap = 0;
+                else if (key.Key == ConsoleKey.RightArrow && SelMap != 4)
+                    SelMap++;
+                switch (SelMap)
+                {
+                    case 0:
+                        Console.SetCursorPosition(0, Console.CursorTop - 16);
+                        Console.WriteLine("" + N +
+                        $"\n                               F1F1" + 
+                        $"\n                               F1 F1F1F1" + 
+                        $"\n                      ABU-DHABI       F1F1F1" + 
+                        $"\n                   F1F1         F1F1F1F    F1F1F1" + 
+                        $"\n                F1F1       F1F1F1    F1          F1F1F1" + 
+                        $"\n              F1F          F1        S1               F1F1F1" + 
+                        $"\n            F1F F1F1F1     F1        T1                    F1F1F1" + 
+                        $"\n         F1F F1F     F1    F1        A1                         F1F1F1" +
+                        $"\n       F1F F1F       F1    F1        R1                              F1F1F1" + 
+                        $"\n     F1F  F1          F1F1F1         T1              F1F1F1               F1F1F1" +
+                        $"\n    F1    F1                         F1            F1F    F-16-TURNS-1         F1" +
+                        $"\n  F1F    F1                          F1           F1                  F1F1F1F1F1" + 
+                        $"\n F1F    F1F                           F1-58-LAPS-F1" + 
+                        $"\n   F1F1F1\n");
+                        Console.WriteLine(W + "                    < Length - 5.28KM >                                          ");
+                        break;
+                    case 1:
+                        Console.SetCursorPosition(0, Console.CursorTop - 16);
+                        Console.WriteLine("" + N +
+                        $"\n                               F1{G}F1{N}" +
+                        $"\n                               F1 {G}F1F1F1{N}" +
+                        $"\n                      ABU({G}DZ{N})BI       {G}F1F1F1" +
+                        $"\n                   F1F1{N}         F1F1F1F    {G}F1F1F1" +
+                        $"\n                F1F1{N}       F1F1F1    F1          {G}F1F1F1" +
+                        $"\n              F1F{N}          F1        S1               {G}F1F1F1" +
+                        $"\n            F1F{N} F1F1F1     F1        T1                    {G}F1F1F1" +
+                        $"\n         F1F{N} F1F     F1    F1        A1                         {G}F1F1F1" +
+                        $"\n       F1F{N} F1F       F1    F1        R1                              {G}F1F1{N}F1{G}" +
+                        $"\n     F1F{N}  F1          F1F1F1         T1              F1F1F1               F1F1F1{G}" +
+                        $"\n    F1{N}    F1                         F1            F1F    F-16-TURNS-1         F1{G}" +
+                        $"\n  F1F{N}    F1                          F1           F1                 ({G}DZ{N})1F1F1F1" +
+                        $"\n F1F    F1F                           F1-58-LAPS-F1" +
+                        $"\n   F1F1F1\n");
+                        Console.WriteLine(W + "                    < " + G + "DRS " + W + "Zones - 2 >                 ");
+                        break;
+                    case 2:
+                        Console.SetCursorPosition(0, Console.CursorTop - 16);
+                        Console.WriteLine("" + N +
+                        $"\n                               F1F1" +
+                        $"\n                               F1 F1F1F1" +
+                        $"\n                      ABU-DHABI       F1F1F1" +
+                        $"\n                   F1F1         F1F1F1F    F1F1F1" +
+                        $"\n                F1F1       F1F1F1    F1          F1F1F1" +
+                        $"\n              F1F          F1        {R}S1{N}               F1F1F1" +
+                        $"\n            F1F F1F1F1     F1        {R}T1{N}                    F1F1F1" +
+                        $"\n         F1F F1F     F1    F1        {R}A1{N}                         F1F1F1" +
+                        $"\n       F1F F1F       F1    F1        {R}R1{N}                              F1F1F1" +
+                        $"\n     F1F  F1          F1F1F1         {R}T1              F1F1F1{N}               F1F1F1" +
+                        $"\n    F1    F1                         {R}F1            F1F    F-16-TURNS-1{N}         F1" +
+                        $"\n  F1F    F1                          {R}F1           F1{N}                  F1F1F1F1F1" +
+                        $"\n F1F    F1F                           {R}F1-58-LAPS-F1{N}" +
+                        $"\n   F1F1F1\n");
+                        Console.WriteLine(W + "                      < " + R + "Sector 1" + W + " >                      ");
+                        break;
+                    case 3:
+                        Console.SetCursorPosition(0, Console.CursorTop - 16);
+                        Console.WriteLine("" + B +
+                        $"\n                               F1F1" +
+                        $"\n                               F1 F1F1F1" +
+                        $"\n                      ABU-DHABI       F1F1F1" +
+                        $"\n                   F1F1{N}         F1F1F1F    {B}F1F1F1" +
+                        $"\n                F1F1{N}       F1F1F1    F1          {B}F1F1F1" +
+                        $"\n              F1F{N}          F1        S1               {B}F1F1F1" +
+                        $"\n            F1F{N} F1F1F1     F1        T1                    {B}F1F1F1" +
+                        $"\n         F1F{N} F1F     F1    F1        A1                         {B}F1F1F1" +
+                        $"\n       F1F{N} F1F       F1    F1        R1                              {B}F1F1F1" +
+                        $"\n     F1F{N}  F1          F1F1F1         T1              F1F1F1               {B}F1F1F1" +
+                        $"\n    F1{N}    F1                         F1            F1F    F-16-TURNS-1         {B}F1{N}" +
+                        $"\n  F1F    F1                          F1           F1                  {B}F1F1F1F1F1{N}" +
+                        $"\n F1F    F1F                           F1-58-LAPS-F1" +
+                        $"\n   F1F1F1\n");
+                        Console.WriteLine(W + "                      < " + B + "Sector 2" + W + " >                     ");
+                        break;
+                    case 4:
+                        Console.SetCursorPosition(0, Console.CursorTop - 16);
+                        Console.WriteLine("" + N +
+                        $"\n                               F1F1" +
+                        $"\n                               F1 F1F1F1" +
+                        $"\n                      ABU-DHABI       F1F1F1" +
+                        $"\n                   F1F1         {Y}F1F1F1F{N}    F1F1F1" +
+                        $"\n                F1F1       {Y}F1F1F1    F1{N}          F1F1F1" +
+                        $"\n              F1F          {Y}F1{N}        S1               F1F1F1" +
+                        $"\n            F1F {Y}F1F1F1     F1{N}        T1                    F1F1F1" +
+                        $"\n         F1F {Y}F1F     F1    F1{N}        A1                         F1F1F1" +
+                        $"\n       F1F {Y}F1F       F1    F1{N}        R1                              F1F1F1" +
+                        $"\n     F1F  {Y}F1          F1F1F1{N}         T1              F1F1F1               F1F1F1" +
+                        $"\n    F1    {Y}F1{N}                         F1            F1F    F-16-TURNS-1         F1" +
+                        $"\n  {Y}F1F    F1{N}                          F1           F1                  F1F1F1F1F1" +
+                        $"\n {Y}F1F    F1F{N}                           F1-58-LAPS-F1" +
+                        $"\n   {Y}F1F1F1\n");
+                        Console.WriteLine(W + "                      < " + Y + "Sector 3" + W + " >                   ");
+                        break;
+                }
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+            } while (key.Key != ConsoleKey.Escape);
         }
     }
 

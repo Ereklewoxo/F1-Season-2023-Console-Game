@@ -433,24 +433,24 @@ namespace F1_Season_2023_Ew
         {
             var driverData = new List<Tuple<string, string, string, int, string, double>>
             {
-                new Tuple<string, string, string, int, string, double>(TeamList()[0], "Lewis Hamilton ", "HAM", 44, "United Kingdom", 6.41),
-                new Tuple<string, string, string, int, string, double>(TeamList()[0], "George Russell ", "RUS", 63, "United Kingdom", 6.45),
-                new Tuple<string, string, string, int, string, double>(TeamList()[1], "Max Verstappen ", "VER", 1, "Netherlands", 2.59),
-                new Tuple<string, string, string, int, string, double>(TeamList()[1], "Sergio Perez   ", "PER", 11, "Mexico", 5),
+                new Tuple<string, string, string, int, string, double>(TeamList()[0], "Lewis Hamilton", "HAM", 44, "United Kingdom", 6.41),
+                new Tuple<string, string, string, int, string, double>(TeamList()[0], "George Russell", "RUS", 63, "United Kingdom", 6.45),
+                new Tuple<string, string, string, int, string, double>(TeamList()[1], "Max Verstappen", "VER", 1, "Netherlands", 2.59),
+                new Tuple<string, string, string, int, string, double>(TeamList()[1], "Sergio Perez", "PER", 11, "Mexico", 5),
                 new Tuple<string, string, string, int, string, double>(TeamList()[2], "Charles Leclerc", "LEC", 16, "Monaco", 3),
-                new Tuple<string, string, string, int, string, double>(TeamList()[2], "Carlos Sainz   ", "SAI", 55, "Spain", 3.82),
-                new Tuple<string, string, string, int, string, double>(TeamList()[3], "Lando Norris   ", "NOR", 4, "United Kingdom", 8.06),
-                new Tuple<string, string, string, int, string, double>(TeamList()[3], "Oscar Piastri  ", "PIA", 81, "Australia", 11.11),
-                new Tuple<string, string, string, int, string, double>(TeamList()[4], "Esteban Ocon   ", "OCO", 31, "France", 10.68),
-                new Tuple<string, string, string, int, string, double>(TeamList()[4], "Pierre Gasly   ", "GAS", 10, "France", 12.50),
-                new Tuple<string, string, string, int, string, double>(TeamList()[5], "Yuki Tsunoda   ", "TSU", 22, "Japan", 13.73),
-                new Tuple<string, string, string, int, string, double>(TeamList()[5], "Nyck de Vries  ", "DEV", 45, "Netherlands", 13),
-                new Tuple<string, string, string, int, string, double>(TeamList()[6], "Lance Stroll   ", "STR", 18, "Canada", 15.77),
+                new Tuple<string, string, string, int, string, double>(TeamList()[2], "Carlos Sainz", "SAI", 55, "Spain", 3.82),
+                new Tuple<string, string, string, int, string, double>(TeamList()[3], "Lando Norris", "NOR", 4, "United Kingdom", 8.06),
+                new Tuple<string, string, string, int, string, double>(TeamList()[3], "Oscar Piastri", "PIA", 81, "Australia", 11.11),
+                new Tuple<string, string, string, int, string, double>(TeamList()[4], "Esteban Ocon", "OCO", 31, "France", 10.68),
+                new Tuple<string, string, string, int, string, double>(TeamList()[4], "Pierre Gasly", "GAS", 10, "France", 12.50),
+                new Tuple<string, string, string, int, string, double>(TeamList()[5], "Yuki Tsunoda", "TSU", 22, "Japan", 13.73),
+                new Tuple<string, string, string, int, string, double>(TeamList()[5], "Nyck de Vries", "DEV", 45, "Netherlands", 13),
+                new Tuple<string, string, string, int, string, double>(TeamList()[6], "Lance Stroll", "STR", 18, "Canada", 15.77),
                 new Tuple<string, string, string, int, string, double>(TeamList()[6], "Fernando Alonso", "ALO", 14, "Spain", 8.27),
                 new Tuple<string, string, string, int, string, double>(TeamList()[7], "Alexander Albon", "ALB", 23, "Thailand", 15.57),
-                new Tuple<string, string, string, int, string, double>(TeamList()[7], "Logan Sargeant ", "SAR", 6, "United States", 16.42),
+                new Tuple<string, string, string, int, string, double>(TeamList()[7], "Logan Sargeant", "SAR", 6, "United States", 16.42),
                 new Tuple<string, string, string, int, string, double>(TeamList()[8], "Valtteri Bottas", "BOT", 77, "Finland", 11.78),
-                new Tuple<string, string, string, int, string, double>(TeamList()[8], "Zhou Guanyu    ", "ZHO", 24, "China", 14.41),
+                new Tuple<string, string, string, int, string, double>(TeamList()[8], "Zhou Guanyu", "ZHO", 24, "China", 14.41),
                 new Tuple<string, string, string, int, string, double>(TeamList()[9], "Kevin Magnussen", "MAG", 20, "Denmark", 12.36),
                 new Tuple<string, string, string, int, string, double>(TeamList()[9], "Nico Hulkenberg", "HUL", 25, "Germany", 17.5)
             };
@@ -986,9 +986,9 @@ namespace F1_Season_2023_Ew
         {
             var driver = Data.DriverData();
             Random rnd = new();
-            int userKey = 0;
             double startRndDouble;
             int startRnd;
+            int userKey = 0;
             List<KeyValuePair<int, double>> lineup = new() { };
             do
             {
@@ -997,9 +997,9 @@ namespace F1_Season_2023_Ew
                     startRndDouble = rnd.NextDouble();
                     startRnd = rnd.Next(10);
                     if (i == user)
-                    { 
-                        lineup.Add(new KeyValuePair<int, double>(driver[i].Item4, qualification));
+                    {
                         userKey = driver[i].Item4;
+                        lineup.Add(new KeyValuePair<int, double>(userKey, 99));
                     }
                     else
                         lineup.Add(new KeyValuePair<int, double>(driver[i].Item4, startRnd + driver[i].Item6 - startRndDouble));
@@ -1012,8 +1012,6 @@ namespace F1_Season_2023_Ew
                 {
                     var item = lineup[i];
                     lineup.RemoveAt(i);
-                    if (qualification > i)
-                        qualification--;
                     lineup.Insert(qualification, item);
                     break;
                 }
@@ -1030,8 +1028,9 @@ namespace F1_Season_2023_Ew
             return colorIndex;
         }
         public static string Gray = "\x1b[38;5;245m";
+        public static string LessGray = "\x1b[38;5;249m";
         public static string White = "\x1b[38;5;255m";
-        public static string Purple = "\x1b[38;2;213;0;222m";
+        public static string Gold = "\x1b[38;2;245;232;3m";
     }
     public class QPlayOrSkip
     {
@@ -1084,6 +1083,7 @@ namespace F1_Season_2023_Ew
             var userChoice = TeamSelector.TeamListing();
             int qualifying = QPlayOrSkip.PlayOrSkipQ(circuit, userChoice[0].Item1 / 2);
             var startingLineup = LineupGenerator.StartingLineup(userChoice[0].Item1, qualifying);
+            QGraphics.QLineup(startingLineup, userChoice);
             string userTeamColor = Colors.Teams()[userChoice[0].Item1/2];
             int selPreRace = 1;
             do
@@ -1133,7 +1133,7 @@ namespace F1_Season_2023_Ew
                     if (key.Key == ConsoleKey.DownArrow || key.Key == ConsoleKey.S)
                         selPreRace = Math.Min(selPreRace + 1, 4);
                     else if (key.Key == ConsoleKey.UpArrow || key.Key == ConsoleKey.W)
-                        selPreRace = Math.Max(selPreRace - 1, 0);
+                        selPreRace = Math.Max(selPreRace - 1, 1);
                     Console.SetCursorPosition(0, Console.CursorTop - 4);
                 } while (key.Key != ConsoleKey.Enter);
                 if (selPreRace == 1)
@@ -1242,10 +1242,6 @@ namespace F1_Season_2023_Ew
                         default:
                             break;
                     }
-                    do
-                    {
-                        key = Console.ReadKey(true);
-                    } while (key.Key != ConsoleKey.Escape);
                 }
             } while (selPreRace != 4);
         }
