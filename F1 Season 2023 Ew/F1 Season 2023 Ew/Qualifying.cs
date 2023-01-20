@@ -115,7 +115,7 @@ namespace F1_Season_2023_Ew
     {
         public static List<string> CircuitKeyList(int circuit)
         {
-            var circuitKeyList = new List<string> { "E R R O R " };
+            var circuitKeyList = new List<string> { "E ", "R ", "R ", "O ", "R " };
             switch (circuit)
             {
                 case 0:
@@ -164,6 +164,44 @@ namespace F1_Season_2023_Ew
             return circuitKeyList;
         }
     }
+    public static class QPlayOrSkip
+    {
+        public static int PlayOrSkipQ(int circuit, int userTeam)
+        {
+            Console.Clear();
+            int qualifying;
+            ConsoleKeyInfo key;
+            bool selectedOption = true;
+            Console.WriteLine($"{Colors.White}           Do you wish to play qualifications?\n{Colors.Gray} If you skip you'll be given a random starting position\n");
+            do
+            {
+                switch (selectedOption)
+                {
+                    case true:
+                        Console.Write($"\r               {Colors.Teams()[userTeam]}Play                  {Colors.Gray}Skip");
+                        break;
+                    case false:
+                        Console.Write($"\r               {Colors.Gray}Play                  {Colors.Teams()[userTeam]}Skip");
+                        break;
+                }
+                key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.LeftArrow)
+                    selectedOption = true;
+                else if (key.Key == ConsoleKey.RightArrow)
+                    selectedOption = false;
+            } while (key.Key != ConsoleKey.Enter);
+            Console.Clear();
+            if (selectedOption)
+                qualifying = Qualifying.Qualification(userTeam, circuit);
+            else
+            {
+                Random rnd = new();
+                int startRnd = rnd.Next(20);
+                qualifying = startRnd;
+            }
+            return qualifying;
+        }
+    }
     public static class Qualifying
     {
         public static int Qualification(int userTeam, int circuit)
@@ -171,7 +209,7 @@ namespace F1_Season_2023_Ew
             int score = 20;
             for (int q = -2; q < 4; q++)
             {
-                int lives = 6 - Menu.Difficulty;
+                int lives = 6 - Data.Difficulty;
                 ConsoleKeyInfo key;
                 Stopwatch stopwatch = new();
                 var currentCircuit = CircuitKeyLists.CircuitKeyList(circuit);
@@ -216,6 +254,15 @@ namespace F1_Season_2023_Ew
                             case "> ":
                                 currentKey = ConsoleKey.RightArrow;
                                 break;
+                            case "E ":
+                                currentKey = ConsoleKey.E;
+                                break;
+                            case "R ":
+                                currentKey = ConsoleKey.R;
+                                break;
+                            case "O ":
+                                currentKey = ConsoleKey.O;
+                                break;
                             case "D ":
                                 break;
                         }
@@ -242,8 +289,7 @@ namespace F1_Season_2023_Ew
                     stopwatch.Stop();
                 }
                 if (stopwatch.IsRunning) { stopwatch.Stop(); }
-                double time = stopwatch.ElapsedMilliseconds;
-                double multi = currentCircuit.Count / (time/1000);
+                double time = stopwatch.ElapsedMilliseconds, multi = currentCircuit.Count / (time/1000);
                 if (q > 0)
                 {
                     if (lives == 0)
