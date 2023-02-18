@@ -2,6 +2,62 @@
 
 namespace F1_Season_2023_Ew
 {
+    public static class CircuitKeyLists
+    {
+        public static List<string> CircuitKeyList(int circuit)
+        {
+            var circuitKeyList = new List<string> { "E ", "R ", "R ", "O ", "R " };
+            switch (circuit)
+            {
+                case 0:
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "D ", "> ", "< ", "> ", "< ", "> ", "< ", "< ", "D ", "< ", "> ", "> ", "> ", "> ", "D " };
+                    break;
+                case 1:
+                    circuitKeyList = new List<string> { "< ", "> ", "< ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "> ", "< ", "< ", "> ", "< ", "> ", "< ", "< ", "> ", "D ", "< ", "> ", "< ", "> ", "> ", "D ", "< ", "< ", "< ", "D " };
+                    break;
+                case 2:
+                    circuitKeyList = new List<string> { "> ", "< ", "D ", "> ", "< ", "> ", "> ", "< ", "> ", "< ", "> ", "D ", "> ", "> ", "< ", "> ", "D " };
+                    break;
+                case 3:
+                    circuitKeyList = new List<string> { "< ", "< ", "D ", "< ", "> ", "< ", "> ", "> ", "< ", "> ", "< ", "> ", "< ", "< ", "< ", "< ", "< ", "> ", "< ", "> ", "> ", "D " };
+                    break;
+                case 4:
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "> ", "< ", "< ", "< ", "> ", "D ", "< ", "< ", "> ", "< ", "< ", "> ", "< ", "D ", "< ", "< ", "> ", "D " };
+                    break;
+                case 5:
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "< ", "> ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "> ", "< ", "> ", "< ", "< ", "D ", "> " };
+                    break;
+                case 6:
+                    circuitKeyList = new List<string> { "> ", "> ", "< ", "> ", "> ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "< ", "> ", "> ", "D " };
+                    break;
+                case 7:
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "> ", "> ", "< ", "< ", "< ", "> ", "> ", "D ", "< ", "< ", "> ", "> ", "< ", "> ", "> ", "D " };
+                    break;
+                case 8:
+                    circuitKeyList = new List<string> { "< ", "> ", "> ", "< ", "> ", "< ", "> ", "D ", "> ", "< ", "> ", "< ", "D ", "> ", "> ", "< ", "D " };
+                    break;
+                case 9:
+                    circuitKeyList = new List<string> { "> ", "D ", "< ", "> ", "D ", "> ", "> ", "< ", "< ", "> ", "> ", "> ", "D " };
+                    break;
+                case 10:
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "< ", "D ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "> ", "< ", "D ", "> ", "< ", "> ", "> " };
+                    break;
+                case 11:
+                    circuitKeyList = new List<string> { "> ", "D ", "< ", "> ", "< ", "> ", "> ", "< ", "< ", "> ", "< ", "> ", "> ", "< ", "> ", "D " };
+                    break;
+                case 12:
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "D ", "> ", "< ", "> ", "> ", "< ", "< ", "< ", "> ", "< ", "> ", "> ", "< ", "< ", "> ", "< ", "D " };
+                    break;
+                case 20:
+                    circuitKeyList = new List<string> { "< ", "> ", "< ", "D ", "< ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "< ", "< ", "< ", "D ", "< " };
+                    break;
+                case 22:
+                    circuitKeyList = new List<string> { "< ", "< ", "> ", "< ", "< ", "D ", "< ", "> ", "< ", "D ", "< ", "> ", "> ", "> ", "< ", "< ", "> ", "> " };
+                    break;
+            }
+            return circuitKeyList;
+        }
+    }
     public static class QGraphics
     {
         public static string Qlives(int lives)
@@ -23,8 +79,6 @@ namespace F1_Season_2023_Ew
                     break;
                 case 1:
                     symblos = $"{Colors.Teams()[2]}♦ ";
-                    break;
-                case 0:
                     break;
             }
             return symblos;
@@ -59,8 +113,7 @@ namespace F1_Season_2023_Ew
                $"20{Colors.Teams()[2]}|");
             Data data = new();
             ConsoleKeyInfo key;
-            int number = 20;
-            int delay = 1;
+            int number = 20, delay = 1;
             Console.Write('\r');
             for (int n = 19; n > -1; n--)
             {
@@ -111,59 +164,6 @@ namespace F1_Season_2023_Ew
             } while (key.Key != ConsoleKey.Enter);
         }
     }
-    public static class CircuitKeyLists
-    {
-        public static List<string> CircuitKeyList(int circuit)
-        {
-            var circuitKeyList = new List<string> { "E ", "R ", "R ", "O ", "R " };
-            switch (circuit)
-            {
-                case 0:
-                    circuitKeyList = new List<string> { "> ", "< ", "> ", "D ", "> ", "< ", "> ", "< ", "> ", "< ", "< ", "D ", "< ", "> ", "> ", "> ", "> ", "D " };
-                    break;
-                case 1:
-                    circuitKeyList = new List<string> { "< ", "> ", "< ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "> ", "< ", "< ", "> ", "< ", "> ", "< ", "< ", "> ", "D ", "< ", "> ", "< ", "> ", "> ", "D ", "< ", "< ", "< ", "D " };
-                    break;
-                case 2:
-                    circuitKeyList = new List<string> { "> ", "< ", "D ", "> ", "< ", "> ", "> ", "< ", "> ", "< ", "> ", "D ", "> ", "> ", "< ", "> ", "D " };
-                    break;
-                case 4:
-                    circuitKeyList = new List<string> { "< ", "< ", "D ", "< ", "> ", "< ", "> ", "> ", "< ", "> ", "< ", "> ", "< ", "< ", "< ", "< ", "< ", "> ", "< ", "> ", "> ", "D " };
-                    break;
-                case 5:
-                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "> ", "< ", "< ", "< ", "> ", "D ", "< ", "< ", "> ", "< ", "< ", "> ", "< ", "D ", "< ", "< ", "> ", "D " };
-                    break;
-                case 6: 
-                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "< ", "> ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "> ", "< ", "> ", "< ", "< ", "D ", "> " };
-                    break;
-                case 7:
-                    circuitKeyList = new List<string> { "> ", "> ", "< ", "> ", "> ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "< ", "> ", "> ", "D " };
-                    break;
-                case 8:          
-                    circuitKeyList = new List<string> { "> ", "< ", "> ", "> ", "> ", "< ", "< ", "< ", "> ", "> ", "D ", "< ", "< ", "> ", "> ", "< ", "> ", "> ", "D " };
-                    break;
-                case 9:      
-                    circuitKeyList = new List<string> { "< ", "> ", "> ", "< ", "> ", "< ", "> ", "D ", "> ", "< ", "> ", "< ", "D ", "> ", "> ", "< ", "D " };
-                    break;
-                case 10:    
-                    circuitKeyList = new List<string> { "> ", "D ", "< ", "> ", "D ", "> ", "> ", "< ", "< ", "> ", "> ", "> ", "D " };
-                    break;
-                case 11:
-                    circuitKeyList = new List<string> { "> ", "< ", "> ", "< ", "< ", "D ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "> ", "< ", "D ", "> ", "< ", "> ", "> " };
-                    break;
-                case 12:
-                    circuitKeyList = new List<string> { "> ", "D ", "< ", "> ", "< ", "> ", "> ", "< ", "< ", "> ", "< ", "> ", "> ", "< ", "> ", "D " };
-                    break;
-                case 21:
-                    circuitKeyList = new List<string> { "< ", "> ", "< ", "D ", "< ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "< ", "< ", "< ", "D ", "< " };
-                    break;
-                case 23:
-                    circuitKeyList = new List<string> { "< ", "< ", "> ", "< ", "< ", "D ", "< ", "> ", "< ", "D ", "< ", "> ", "> ", "> ", "< ", "< ", "> ", "> " };
-                    break;
-            }
-            return circuitKeyList;
-        }
-    }
     public static class QPlayOrSkip
     {
         public static int PlayOrSkipQ(int circuit, int userTeam)
@@ -172,7 +172,7 @@ namespace F1_Season_2023_Ew
             int qualifying;
             ConsoleKeyInfo key;
             bool selectedOption = true;
-            Console.WriteLine($"{Colors.White}           Do you wish to play qualifications?\n{Colors.Gray} If you skip you'll be given a random starting position\n");
+            Console.WriteLine($"{Colors.White}           Do you wish to play qualifications?\n{Colors.Gray}    If you skip you'll be given a random grid position\n");
             do
             {
                 switch (selectedOption)
@@ -196,7 +196,7 @@ namespace F1_Season_2023_Ew
             else
             {
                 Random rnd = new();
-                int startRnd = rnd.Next(20);
+                int startRnd = rnd.Next(4, 20);
                 qualifying = startRnd;
             }
             return qualifying;
@@ -207,14 +207,15 @@ namespace F1_Season_2023_Ew
         public static int Qualification(int userTeam, int circuit)
         {
             int score = 20;
+            var circuitData = Data.CircuitData();
             for (int q = -2; q < 4; q++)
             {
                 int lives = 6 - Data.Difficulty;
                 ConsoleKeyInfo key;
                 Stopwatch stopwatch = new();
                 var currentCircuit = CircuitKeyLists.CircuitKeyList(circuit);
-                Console.Clear();
-                Console.Write($"{Colors.White}{Data.CircuitData()[circuit].Item1} Grand Prix 2023 {Colors.Teams()[userTeam]}> {Colors.White}");
+                Util.ClearPart(0);
+                Console.Write($"{Colors.White}{circuitData[circuit].Item1} Grand Prix 2023 {Colors.Teams()[userTeam]}> {Colors.White}");
                 if (q > 0)
                     Console.WriteLine($"Q{q}"); 
                 else
@@ -223,23 +224,17 @@ namespace F1_Season_2023_Ew
                 {
                     Console.Write($"{Colors.Gray}Press the keys in the right order\n{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}{Colors.Gray}You have {lives} ");
                     if (lives == 1)
-                        Console.Write("life, ");
+                        Console.Write("life ");
                     else
-                        Console.Write("lives, ");
+                        Console.Write("lives ");
                 }
                 else
                     Console.Write(Colors.Teams()[userTeam] + QGraphics.Qlives(lives) + Colors.Gray);
-                Console.Write("Press 'Enter' to start");
-                do
-                {
-                    key = Console.ReadKey(true);
-                } while (key.Key != ConsoleKey.Enter);
+                Console.Write(Colors.Dark + "[Enter]");
+                Util.KeyAdvance(ConsoleKey.Enter);
                 Console.WriteLine($"\r{Colors.Teams()[userTeam]}{QGraphics.Qlives(lives)}                                                               \n" + Colors.Gray);
                 for (int i = 0; i < currentCircuit.Count; i++)
-                {
                     Console.Write(currentCircuit[i]);
-                }
-                Console.Write('\r');
                 stopwatch.Start();
                 while (stopwatch.IsRunning)
                 {
@@ -263,8 +258,6 @@ namespace F1_Season_2023_Ew
                             case "O ":
                                 currentKey = ConsoleKey.O;
                                 break;
-                            case "D ":
-                                break;
                         }
                         do
                         {
@@ -274,31 +267,26 @@ namespace F1_Season_2023_Ew
                             if (lives < oldLives)
                             {
                                 Console.SetCursorPosition(0, Console.CursorTop - 2);
-                                Console.Write(Colors.Teams()[userTeam]);
-                                Console.WriteLine('\r' + QGraphics.Qlives(lives) + " \n");
+                                Console.WriteLine(Colors.Teams()[userTeam] + '\r' + QGraphics.Qlives(lives) + " \n");
                             }
                             if (lives == 0) { break; }
                         } while (key.Key != currentKey);
                         if (lives == 0) { break; }
                         Console.Write('\r');
                         for (int j = 0; j <= i; j++)
-                        {
                             Console.Write(Colors.Teams()[userTeam] + currentCircuit[j]);
-                        }
                     }
                     stopwatch.Stop();
                 }
                 if (stopwatch.IsRunning) { stopwatch.Stop(); }
-                double time = stopwatch.ElapsedMilliseconds, multi = currentCircuit.Count / (time/1000);
+                double time = stopwatch.ElapsedMilliseconds, multi = currentCircuit.Count / (time / 1000);
+                Console.Write(Colors.White + "\n\nYour Time ");
                 if (q > 0)
                 {
                     if (lives == 0)
                     {
-                        Console.WriteLine($"\n\n{Colors.Teams()[2]}Shunt! {Colors.White}You're out\n" + Colors.Gray + "Press 'Enter' to continue");
-                        do
-                        {
-                            key = Console.ReadKey(true);
-                        } while (key.Key != ConsoleKey.Enter);
+                        Console.WriteLine($"\r{Colors.Teams()[2]}Shunt! {Colors.White}You're out" + Colors.Dark + " [Enter]");
+                        Util.KeyAdvance(ConsoleKey.Enter);
                         if (q == 1)
                             score = 19;
                         else if (q == 2)
@@ -309,20 +297,20 @@ namespace F1_Season_2023_Ew
                     }
                     else if (multi > 6.6 + q * 0.1)
                     {
-                        Console.WriteLine(Colors.Gold + "\n\nTime: " + time / 1000 + " - Perfect Lap!  " + Colors.White);
+                        Console.WriteLine(Colors.Gold + time / 1000 + Colors.White + " · " + Colors.Gold + "Perfect Lap!" + Colors.White);
                         if (q < 3)
-                            Console.WriteLine("You're through to the next round");
+                            Console.Write("You're through to the next round");
                         else
-                            Console.WriteLine(Colors.Teams()[userTeam] + "You're on Pole!");
+                            Console.Write(Colors.Teams()[userTeam] + "You're on Pole!");
                         score = 0;
                     }
                     else if (multi > 5.6 + q * 0.1)
                     {
-                        Console.WriteLine("\n\nTime: " + Colors.Teams()[userTeam] + time / 1000 + " - Great Lap!    " + Colors.White);
+                        Console.WriteLine(Colors.Teams()[userTeam] + time / 1000 + Colors.White + " · Great Lap");
                         if (q < 3)
-                            Console.WriteLine("You're through to the next round");
+                            Console.Write("You're through to the next round");
                         else
-                            Console.WriteLine("Lets check the results");
+                            Console.Write("Lets check the results");
                         if (multi > 6.4)
                             score = 1;
                         else if (multi > 6.2)
@@ -334,11 +322,11 @@ namespace F1_Season_2023_Ew
                     }
                     else if (multi > 4.4 + q * 0.1)
                     {
-                        Console.WriteLine("\n\nTime: " + Colors.Teams()[userTeam] + time / 1000 + " - Good Lap      " + Colors.White);
+                        Console.WriteLine(Colors.Teams()[userTeam] + time / 1000 + Colors.White + " · Good Lap");
                         if (q < 3)
-                            Console.WriteLine("You're through to the next round");
+                            Console.Write("You're through to the next round");
                         else
-                            Console.WriteLine("Lets check the results");
+                            Console.Write("Lets check the results");
                         if (multi > 5.6)
                             score = 4;
                         else if (multi > 5.2)
@@ -350,11 +338,11 @@ namespace F1_Season_2023_Ew
                     }
                     else if (multi > 3.9 + q * 0.1)
                     {
-                        Console.Write(Colors.White + "\n\nTime: " + time / 1000);
+                        Console.Write(time / 1000);
                         if (q < 3)
-                            Console.WriteLine(" - Just enough   \nYou're through to the next round");
+                            Console.Write(" · Just enough\nYou're through to the next round");
                         else
-                            Console.WriteLine(" - Ok            \nLets check the results");
+                            Console.Write(" · Ok\nLets check the results");
                         if (multi > 4.4)
                             score = 7;
                         else if (multi > 3.9)
@@ -362,16 +350,13 @@ namespace F1_Season_2023_Ew
                     }
                     else if (multi > 3 + q * 0.1)
                     {
-                        Console.Write(Colors.White + "\n\nTime: " + Colors.Teams()[2] + time / 1000 + Colors.White);
+                        Console.Write(Colors.Teams()[2] + time / 1000 + Colors.White);
                         if (q < 3)
-                            Console.WriteLine(" - Not enough    \nYou're eliminated");
+                            Console.Write($" · Not enough\n{Colors.Teams()[2]}You're eliminated");
                         else
-                            Console.WriteLine(" - Subpar        \nLets check the results");
-                        Console.Write(Colors.Gray + "Press 'Enter' to continue");
-                        do
-                        {
-                            key = Console.ReadKey(true);
-                        } while (key.Key != ConsoleKey.Enter);
+                            Console.Write(" · Subpar\nLets check the results");
+                        Console.Write(Colors.Dark + " [Enter]");
+                        Util.KeyAdvance(ConsoleKey.Enter);
                         if (q == 1)
                         {
                             if (multi > 3.9)
@@ -400,16 +385,13 @@ namespace F1_Season_2023_Ew
                     }
                     else if (multi > 2 + q * 0.1)
                     {
-                        Console.Write(Colors.White + "\n\nTime: " + Colors.Teams()[2] + time / 1000);
+                        Console.Write(Colors.Teams()[2] + time / 1000 + Colors.White);
                         if (q < 3)
-                            Console.WriteLine(" - Bad       \nYou're eliminated");
+                            Console.Write($" · {Colors.Teams()[2]}Bad\nYou're eliminated");
                         else
-                            Console.WriteLine(" - Not good  \nLets check the results");
-                        Console.Write(Colors.Gray + "Press 'Enter' to continue");
-                        do
-                        {
-                            key = Console.ReadKey(true);
-                        } while (key.Key != ConsoleKey.Enter);
+                            Console.Write(" · Not good\nLets check the results");
+                        Console.Write(Colors.Dark + " [Enter]");
+                        Util.KeyAdvance(ConsoleKey.Enter);
                         if (q == 1)
                             score = 19;
                         else if (q == 2)
@@ -420,11 +402,8 @@ namespace F1_Season_2023_Ew
                     }
                     else
                     {
-                        Console.WriteLine($"\n\n{Colors.Gray}You fell asleep\nPress 'Enter' to continue");
-                        do
-                        {
-                            key = Console.ReadKey(true);
-                        } while (key.Key != ConsoleKey.Enter);
+                        Console.WriteLine($"\r{Colors.Gray}You fell asleep {Colors.Dark}[Enter]");
+                        Util.KeyAdvance(ConsoleKey.Enter);
                         if (q == 1)
                             score = 19;
                         else if (q == 2)
@@ -433,11 +412,8 @@ namespace F1_Season_2023_Ew
                             score = 9;
                         break;
                     }
-                    Console.Write(Colors.Gray + "Press 'Enter' to continue");
-                    do
-                    {
-                        key = Console.ReadKey(true);
-                    } while (key.Key != ConsoleKey.Enter);
+                    Console.Write(Colors.Dark + " [Enter]");
+                    Util.KeyAdvance(ConsoleKey.Enter);
                 }
             }
             return score;

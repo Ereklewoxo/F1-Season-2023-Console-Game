@@ -5,14 +5,14 @@ namespace F1_Season_2023_Ew
     {
         public static void IntroLogo()
         {
-            string r = "\x1b[38;2;255;15;15m", w = Colors.White;
+            string r = "\x1b[38;2;255;0;0m", w = Colors.White;
             for (int i = 15; i < 256; i++)
             {
-                Console.WriteLine($"\x1b[38;2;{i};15;15m" +
-                @$"     ______________  __" + '\n' +
-                @$"   /  ____________//  /" + '\n' +
-                @$"  /  /  _________//  /" + '\n' +
-                @$" /__/__/         /__/");
+                Console.WriteLine($"\x1b[38;2;{i};0;0m" +
+                "     ______________  __" + '\n' +
+                "   /  ____________//  /" + '\n' +
+                "  /  /  _________//  /" + '\n' +
+                " /__/__/         /__/");
                 Console.SetCursorPosition(0, Console.CursorTop - 4);
                 Task.Delay(1).Wait();
             }
@@ -20,11 +20,11 @@ namespace F1_Season_2023_Ew
                    line2 = @$"{r}   /  ____________//  /{w}  |__ \ / __ \|__ \ \__ \ ",
                    line3 = @$"{r}  /  /  _________//  / {w}  / __// /_/ // __//__  / ",
                    line4 = @$"{r} /__/__/         /__/  {w} /____/\____//____/____/  ";
-            for (int i = 24; i > 0; i--)
+            for (int i = 24; i > 0; i -= 2)
             {
                 Console.WriteLine(line1.Remove(line1.Length - i, line1.Length - (line1.Length - i)) + '\n' + line2.Remove(line1.Length - i, line1.Length - (line1.Length - i)) + '\n' + line3.Remove(line1.Length - i, line1.Length - (line1.Length - i)) + '\n' + line4.Remove(line1.Length - i, line1.Length - (line1.Length - i)));
                 Console.SetCursorPosition(0, Console.CursorTop - 4);
-                Task.Delay(2).Wait();
+                Task.Delay(1).Wait();
             }
         }
     }
@@ -32,8 +32,7 @@ namespace F1_Season_2023_Ew
     {
         public static void Logo()
         {
-            string r = "\x1b[38;2;255;10;10m";
-            string w = Colors.White;
+            string r = "\x1b[38;2;255;0;0m", w = Colors.White;
             Console.WriteLine("" +
             @$"{r}     ______________  __{w}   ___   ____  ___  ____  " + '\n' +
             @$"{r}   /  ____________//  /{w}  |__ \ / __ \|__ \ \__ \ " + '\n' +
@@ -42,7 +41,6 @@ namespace F1_Season_2023_Ew
         }
         public static void DifficultyBar()
         {
-            Menu difficulty = new();
             for (int i = 0; i < Data.Difficulty; i++)
                 Console.Write(Colors.Teams()[2] + "▐");
             for (int i = 0; i < 5 - Data.Difficulty; i++)
@@ -202,10 +200,11 @@ namespace F1_Season_2023_Ew
         {
             Console.WriteLine(Colors.Teams()[2] + "    /Settings_____/                   " + '\n' + Colors.Gray + "   /Exit Game                         " + Colors.White);
         }
-        public static int MainMenu()
+        public static short MainMenu()
         {
             ConsoleKeyInfo key;
-            int outcome = 4, selMenu = 0, selMenuQuick = 0, selMenuCarrer = 0, selMenuSettings = 0;
+            short outcome = 4;
+            int selMenu = 0, selMenuQuick = 0, selMenuCarrer = 0, selMenuSettings = 0;
             bool firstTime = true;
             Display.MenuDefault();
             key = Console.ReadKey(true);
@@ -380,7 +379,12 @@ namespace F1_Season_2023_Ew
                             Display.ChangeingUserData();
                             data.UserData();
                             Console.SetCursorPosition(0, Console.CursorTop - 1);
-                            Console.WriteLine("                                                     \n                                                                                                 \n                                                                       \n                                                                                               \n                                                ");
+                            Console.WriteLine("" +
+                                "                                                                       \n" +
+                                "                                                                       \n" +
+                                "                                                                       \n" +
+                                "                                                                       \n" +
+                                "                                                                       ");
                             data.ChangeUserData = false;
                             Console.SetCursorPosition(0, Console.CursorTop - 7);
                             MenuAnimFourClear();
