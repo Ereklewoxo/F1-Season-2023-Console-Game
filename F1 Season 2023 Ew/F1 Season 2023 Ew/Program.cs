@@ -1,7 +1,5 @@
 ﻿using NAudio.Vorbis;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+using System.Text;
 using VisioForge.MediaFramework.Helpers;
 using WaveOutEvent = NAudio.Wave.WaveOutEvent;
 
@@ -11,180 +9,198 @@ namespace F1_Season_2023_Ew
     public class Data
     {
         public bool ChangeUserData = false;
-        public static int Difficulty = 3;
+        public static int Difficulty { get; set; }
         public static void LoadDifficulty()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string path = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             StreamReader difficultyR = new(@$"{path}\UserData\Difficulty.txt");
             Difficulty = Convert.ToInt32(difficultyR.ReadLine());
             difficultyR.Close();
         }
         public static void SaveDifficulty()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string path = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             StreamWriter difficultyW = new(@$"{path}\UserData\Difficulty.txt");
             difficultyW.Write(Difficulty);
             difficultyW.Close();
         }
-        public static List<Tuple<string, string, string, int, string, int, int>> CircuitData()
-        {
-            var circuitData = new List<Tuple<string, string, string, int, string, int, int>>
-            {                                                           //country          venue                 date             GP             rain% laps 
-                new Tuple<string, string, string, int, string, int, int>("Bahrain",       "Sakhir",             "March", 5,      "Bahrain",         2, 57),
-                new Tuple<string, string, string, int, string, int, int>("Saudi Arabia",  "Jeddah",             "March", 19,     "Saudi Arabian",   0, 50),
-                new Tuple<string, string, string, int, string, int, int>("Australia",     "Albert Park",        "April", 2,      "Austrlian",      17, 58),
-                new Tuple<string, string, string, int, string, int, int>("Azerbaijan",    "Baku",               "April", 30,     "Azerbaijan",     16, 51),
-                new Tuple<string, string, string, int, string, int, int>("USA",           "Miami",              "May", 7,        "Miami",          23, 57),
-                new Tuple<string, string, string, int, string, int, int>("Italy",         "Imola",              "May", 21,       "Emilia Romagna", 15, 63),
-                new Tuple<string, string, string, int, string, int, int>("Monaco",        "Monaco",             "May", 28,       "Monaco",          7, 78),
-                new Tuple<string, string, string, int, string, int, int>("Spain",         "Catalunya",          "June", 4,       "Spanish",        17, 66),
-                new Tuple<string, string, string, int, string, int, int>("Canada",        "Gilles Villeneuve",  "June", 18,      "Canadian",       19, 70),
-                new Tuple<string, string, string, int, string, int, int>("Austria",       "Red Bull Ring",      "July", 2,       "Austrian",       19, 71),
-                new Tuple<string, string, string, int, string, int, int>("Great Britain", "Silverstone",        "July", 9,       "British",        31, 52),
-                new Tuple<string, string, string, int, string, int, int>("Hungary",       "Hungaroring",        "July", 23,      "Hungarian",      21, 70),
-                new Tuple<string, string, string, int, string, int, int>("Belgium",       "Spa",                "July", 30,      "Belgian",        46, 44),
-                new Tuple<string, string, string, int, string, int, int>("Netherlands",   "Zandvoort",          "August", 27,    "Dutch",          22, 72),
-                new Tuple<string, string, string, int, string, int, int>("Italy",         "Monza",              "September", 3,  "Italian",        20, 53),
-                new Tuple<string, string, string, int, string, int, int>("Singapore",     "Marina Bay",         "September", 17, "Singapore",      38, 61),
-                new Tuple<string, string, string, int, string, int, int>("Japan",         "Suzuka",             "September", 24, "Japanese",       40, 53),
-                new Tuple<string, string, string, int, string, int, int>("Qatar",         "Losail",             "October", 8,    "Qatar",           1, 57),
-                new Tuple<string, string, string, int, string, int, int>("USA",           "COTA",               "October", 22,   "United States",  16, 56),
-                new Tuple<string, string, string, int, string, int, int>("Mexico",        "Hermanos Rodriguez", "October", 29,   "Mexican",        17, 71),
-                new Tuple<string, string, string, int, string, int, int>("Brazil",        "Interlagos",         "November", 5,   "Sao Paulo",      35, 71),
-                new Tuple<string, string, string, int, string, int, int>("USA",           "Las Vegas",          "November", 18,  "Las Vegas",      18, 50),
-                new Tuple<string, string, string, int, string, int, int>("Abu Dhabi",     "Yas Marina",         "November", 26,  "Abu Dhabi",       3, 58),
-                new Tuple<string, string, string, int, string, int, int>("Portugal",      "Portimao",           "April", 16,     "Portugese",      15, 66)
+        public static List<Tuple<string, string, string, int, string, int, int>> CircuitData() => new()
+            {      //country          venue                 date             GP             rain% laps 
+                new("Bahrain",       "Sakhir",             "March", 5,      "Bahrain",         2, 57),
+                new("Saudi Arabia",  "Jeddah",             "March", 19,     "Saudi Arabian",   0, 50),
+                new("Australia",     "Albert Park",        "April", 2,      "Austrlian",      17, 58),
+                new("Azerbaijan",    "Baku",               "April", 30,     "Azerbaijan",     16, 51),
+                new("USA",           "Miami",              "May", 7,        "Miami",          23, 57),
+                new("Italy",         "Imola",              "May", 21,       "Emilia Romagna", 15, 63),
+                new("Monaco",        "Monaco",             "May", 28,       "Monaco",          7, 78),
+                new("Spain",         "Catalunya",          "June", 4,       "Spanish",        17, 66),
+                new("Canada",        "Gilles Villeneuve",  "June", 18,      "Canadian",       19, 70),
+                new("Austria",       "Red Bull Ring",      "July", 2,       "Austrian",       19, 71),
+                new("Great Britain", "Silverstone",        "July", 9,       "British",        31, 52),
+                new("Hungary",       "Hungaroring",        "July", 23,      "Hungarian",      21, 70),
+                new("Belgium",       "Spa",                "July", 30,      "Belgian",        46, 44),
+                new("Netherlands",   "Zandvoort",          "August", 27,    "Dutch",          22, 72),
+                new("Italy",         "Monza",              "September", 3,  "Italian",        20, 53),
+                new("Singapore",     "Marina Bay",         "September", 17, "Singapore",      38, 61),
+                new("Japan",         "Suzuka",             "September", 24, "Japanese",       40, 53),
+                new("Qatar",         "Losail",             "October", 8,    "Qatar",           1, 57),
+                new("USA",           "COTA",               "October", 22,   "United States",  16, 56),
+                new("Mexico",        "Hermanos Rodriguez", "October", 29,   "Mexican",        17, 71),
+                new("Brazil",        "Interlagos",         "November", 5,   "Sao Paulo",      35, 71),
+                new("USA",           "Las Vegas",          "November", 18,  "Las Vegas",      18, 50),
+                new("Abu Dhabi",     "Yas Marina",         "November", 26,  "Abu Dhabi",       3, 58),
+                new("Portugal",      "Portimao",           "April", 16,     "Portugese",      15, 66)
             };
-            return circuitData;
-        }
-        public static List<string> TeamList()
-        {
-            var teamList = new List<string> { "Mercedes", "Red Bull Racing", "Ferrari", "McLaren", "Alpine", "AlphaTauri", "Aston Martin", "Williams", "Alfa Romeo", "Haas F1 Team" };
-            return teamList;
-        }
-        public static List<Tuple<string, string, string, int, string, Tuple<double, double, int, int>>> DriverData()
-        {
-            var driverData = new List<Tuple<string, string, string, int, string, Tuple<double, double, int, int>>>
-            {                                                                                 //Team            Full Name         SrtNm  Num  Country          Race Data    AG     AF    FL DNF
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[0], "Lewis Hamilton",  "HAM", 44, "United Kingdom", Tuple.Create( 6.41,  5.12, 2, 2)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[0], "George Russell",  "RUS", 63, "United Kingdom", Tuple.Create( 6.36,  4.38, 4, 1)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[1], "Max Verstappen",  "VER",  1, "Netherlands",    Tuple.Create( 3.41,  2.81, 5, 2)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[1], "Sergio Perez",    "PER", 11, "Mexico",         Tuple.Create( 4.82,  3.95, 3, 3)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[2], "Charles Leclerc", "LEC", 16, "Monaco",         Tuple.Create( 3.91,  3.32, 3, 3)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[2], "Carlos Sainz",    "SAI", 55, "Spain",          Tuple.Create( 4.55,  3.50, 2, 6)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[3], "Lando Norris",    "NOR",  4, "United Kingdom", Tuple.Create( 8.05,  7.80, 2, 2)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[3], "Oscar Piastri",   "PIA", 81, "Australia",      Tuple.Create(12.41, 12.29, 0, 3)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[4], "Esteban Ocon",    "OCO", 31, "France",         Tuple.Create(11.74,  8.55, 0, 2)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[4], "Pierre Gasly",    "GAS", 10, "France",         Tuple.Create(12.18, 11.58, 0, 3)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[5], "Yuki Tsunoda",    "TSU", 22, "Japan",          Tuple.Create(14.05, 12.81, 0, 5)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[5], "Nyck de Vries",   "DEV", 45, "Netherlands",    Tuple.Create(13.85, 11.75, 0, 3)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[6], "Lance Stroll",    "STR", 18, "Canada",         Tuple.Create(14.64, 11.95, 0, 3)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[6], "Fernando Alonso", "ALO", 14, "Spain",          Tuple.Create(10.41,  9.65, 0, 6)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[7], "Alexander Albon", "ALB", 23, "Thailand",       Tuple.Create(15.62, 12.86, 0, 5)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[7], "Logan Sargeant",  "SAR",  6, "United States",  Tuple.Create(16.82, 15.52, 0, 5)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[8], "Valtteri Bottas", "BOT", 77, "Finland",        Tuple.Create(11.36, 10.41, 0, 6)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[8], "Zhou Guanyu",     "ZHO", 24, "China",          Tuple.Create(14.27, 12.88, 1, 6)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[9], "Kevin Magnussen", "MAG", 20, "Denmark",        Tuple.Create(12.01, 13.17, 0, 5)),
-                new Tuple<string, string, string, int, string, Tuple<double, double, int, int>>(TeamList()[9], "Nico Hulkenberg", "HUL", 25, "Germany",        Tuple.Create(13.69, 13.44, 0, 3))
+        public static List<string> TeamList() => new() { 
+            "Mercedes    ",
+            "Red Bull    ",
+            "Ferrari     ",
+            "McLaren     ",
+            "Alpine      ",
+            "AlphaTauri  ",
+            "Aston Martin",
+            "Williams    ",
+            "Alfa Romeo  ",
+            "Haas F1 Team"
+        };
+        public static List<Tuple<string, string, string, int, string, Tuple<double, double, int, int>>> DriverData() => new()
+            {     //Team            Full Name         SrtNm  Num  Country          Race Data    AG     AF    FL DNF
+                new(TeamList()[0], "Lewis Hamilton",  "HAM", 44, "United Kingdom", Tuple.Create( 6.31,  4.31, 2, 2)),
+                new(TeamList()[0], "George Russell",  "RUS", 63, "United Kingdom", Tuple.Create( 6.49,  5.48, 4, 2)),
+                new(TeamList()[1], "Max Verstappen",  "VER",  1, "Netherlands",    Tuple.Create( 3.21,  2.15, 5, 2)),
+                new(TeamList()[1], "Sergio Perez",    "PER", 11, "Mexico",         Tuple.Create( 4.52,  3.86, 3, 3)),
+                new(TeamList()[2], "Charles Leclerc", "LEC", 16, "Monaco",         Tuple.Create( 3.91,  3.42, 3, 3)),
+                new(TeamList()[2], "Carlos Sainz",    "SAI", 55, "Spain",          Tuple.Create( 4.83,  4.85, 2, 7)),
+                new(TeamList()[3], "Lando Norris",    "NOR",  4, "United Kingdom", Tuple.Create(10.95, 10.98, 2, 2)),
+                new(TeamList()[3], "Oscar Piastri",   "PIA", 81, "Australia",      Tuple.Create(12.85, 12.89, 0, 3)),
+                new(TeamList()[4], "Esteban Ocon",    "OCO", 31, "France",         Tuple.Create(11.84,  9.89, 0, 2)),
+                new(TeamList()[4], "Pierre Gasly",    "GAS", 10, "France",         Tuple.Create(12.28, 12.18, 0, 3)),
+                new(TeamList()[5], "Yuki Tsunoda",    "TSU", 22, "Japan",          Tuple.Create(14.00, 12.81, 0, 5)),
+                new(TeamList()[5], "Nyck de Vries",   "DEV", 21, "Netherlands",    Tuple.Create(14.00, 12.75, 0, 3)),
+                new(TeamList()[6], "Lance Stroll",    "STR", 18, "Canada",         Tuple.Create(12.62, 10.25, 0, 3)),
+                new(TeamList()[6], "Fernando Alonso", "ALO", 14, "Spain",          Tuple.Create( 7.00,  7.00, 0, 5)),
+                new(TeamList()[7], "Alexander Albon", "ALB", 23, "Thailand",       Tuple.Create(15.42, 12.89, 0, 5)),
+                new(TeamList()[7], "Logan Sargeant",  "SAR",  2, "United States",  Tuple.Create(15.42, 14.22, 0, 5)),
+                new(TeamList()[8], "Valtteri Bottas", "BOT", 77, "Finland",        Tuple.Create(11.32, 10.31, 0, 6)),
+                new(TeamList()[8], "Zhou Guanyu",     "ZHO", 24, "China",          Tuple.Create(14.24, 12.48, 1, 6)),
+                new(TeamList()[9], "Kevin Magnussen", "MAG", 20, "Denmark",        Tuple.Create(12.01, 13.15, 0, 5)),
+                new(TeamList()[9], "Nico Hulkenberg", "HUL", 27, "Germany",        Tuple.Create(13.09, 13.42, 0, 3))
             };
-            return driverData;
-        }
-        public List<Tuple<string, string, string, string, string>> UserData()
+        public static List<int> DriverNumbers()
         {
-            var userData = new List<Tuple<string, string, string, string, string>>
+            var driverNumbers = new List<int>();
+            for (int i = 0; i < DriverData().Count; i++)
+                driverNumbers.Add(DriverData()[i].Item4);
+            return driverNumbers;
+        }
+        public List<Tuple<string?, string?, string?, string?, string?>> UserData()
+        {
+            var userData = new List<Tuple<string?, string?, string?, string?, string?>>
+            { new("FirstName", "LastName", "Full Name", "SHN", "Nationality") };
+            string? firstName, lastName, fullName, shortName, nationality, firstNameRead = "", workingDirectory = Environment.CurrentDirectory, path = Directory.GetParent(workingDirectory).Parent.Parent.FullName, blankSpace = "";
+            try
             {
-                new Tuple<string, string, string, string, string>("John", "Doe", "John Doe", "DOE", "Sealand")
-            };
-            string? firstName, lastName, fullName, shortName, nationality, firstNameRead;
-            string workingDirectory = Environment.CurrentDirectory;
-            string path = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            StreamReader saveFileR = new(@$"{path}\UserData\SaveFile.txt");
-            firstNameRead = saveFileR.ReadLine();
-            if (firstNameRead.IsNullOrEmpty() == false)
-            {
-                firstName = firstNameRead;
-                lastName = saveFileR.ReadLine();
-                fullName = saveFileR.ReadLine();
-                shortName = saveFileR.ReadLine();
-                nationality = saveFileR.ReadLine();
-                userData.Add(new Tuple<string, string, string, string, string>(firstName, lastName, fullName, shortName, nationality));
+                StreamReader saveFileR = new(@$"{path}\UserData\SaveFile.txt");
+                firstNameRead = saveFileR.ReadLine();
+                if (firstNameRead.IsNullOrEmpty() == false)
+                {
+                    firstName = firstNameRead;
+                    lastName = saveFileR.ReadLine();
+                    fullName = saveFileR.ReadLine();
+                    shortName = saveFileR.ReadLine();
+                    nationality = saveFileR.ReadLine();
+                    userData[0] = new(firstName, lastName, fullName, shortName, nationality);
+                }
+                saveFileR.Close();
             }
-            saveFileR.Close();
-            if (firstNameRead.IsNullOrEmpty() || ChangeUserData == true)
+            catch
+            { 
+                Console.WriteLine($"{Colors.White}Can't read save file\nCheck this path - " + @$"{Colors.Gold}{path}\UserData\SaveFile.txt{Colors.White}");
+                Util.KeyAdvance(ConsoleKey.Enter);
+                Util.ClearPart(0);
+            }
+            if (firstNameRead.IsNullOrEmpty() || ChangeUserData)
             {
-                StreamWriter saveFileW = new(@$"{path}\UserData\SaveFile.txt");
                 if (ChangeUserData)
-                    Console.Write("\n              ");
-                Console.Write("     /What's your first name?" + '\n' + Colors.Teams()[2]);
-                if (ChangeUserData)
-                    Console.Write("              ");
-                Console.Write($"    /" + Colors.White);
-                firstName = Console.ReadLine();
-                if (firstName.Length == 1)
-                    firstName = firstName.ToUpper();
-                else if (firstName.Length == 0)
-                    firstName = "John";
-                else
-                    firstName = firstName.Remove(1).ToUpper() + firstName.Remove(0, 1).ToLower();
-                saveFileW.WriteLine(firstName);
+                    blankSpace = "              ";
+                Console.Write($"\n{blankSpace}     /What's your first name?" + '\n' + Colors.Teams()[2] + $"{blankSpace}    /" + Colors.White);
+                firstName = Console.ReadLine().Trim();
+                firstName = UserInfoAdjuster(firstName, UserInfoType.firstName);
                 Console.SetCursorPosition(0, Console.CursorTop - 2);
-                if (ChangeUserData)
-                    Console.Write("              ");
-                Console.Write("     /And your last name?    " + '\n' + Colors.Teams()[2]);
-                if (ChangeUserData)
-                    Console.Write("              ");
-                Console.Write($"    /{firstName} " + Colors.White);
-                lastName = Console.ReadLine();
-                if (lastName.Length == 1)
-                    lastName = lastName.ToUpper();
-                else if (lastName.Length == 0)
-                    lastName = "Doe";
-                else
-                    lastName = lastName.Remove(1).ToUpper() + lastName.Remove(0, 1).ToLower();
-                saveFileW.WriteLine(lastName);
+                Console.Write($"{blankSpace}     /And your last name?    " + '\n' + Colors.Teams()[2] + $"{blankSpace}    /{firstName} " + Colors.White);
+                lastName = Console.ReadLine().Trim();
+                lastName = UserInfoAdjuster(lastName, UserInfoType.lastName);
                 fullName = firstName + " " + lastName;
-                saveFileW.WriteLine(fullName);
-                if (lastName.Length == 3)
-                    shortName = lastName;
-                else if (firstName.Length + lastName.Length < 3)
-                    shortName = firstName + lastName;
-                else if (firstName.Length + lastName.Length == 3)
-                    shortName = firstName + lastName;
-                else if (firstName.Length > 1 && lastName.Length == 1)
-                    shortName = firstName.Remove(2) + lastName;
-                else if (firstName.Length > 1 && lastName.Length < 3)
-                    shortName = firstName.Remove(1) + lastName;
-                else
-                    shortName = lastName.Remove(3);
-                shortName = shortName.ToUpper();
-                saveFileW.WriteLine(shortName);
+                shortName = ShortNameCreator(firstName, lastName);
                 Console.SetCursorPosition(0, Console.CursorTop - 1);
-                Console.Write(Colors.Teams()[2]);
-                if (ChangeUserData)
-                    Console.Write("              ");
-                Console.WriteLine($"    /{firstName} {lastName}" + Colors.White);
-                if (ChangeUserData)
-                    Console.Write("              ");
-                Console.Write("   /Where are you from?" + '\n' + Colors.Teams()[2]);
-                if (ChangeUserData)
-                    Console.Write("              ");
-                Console.Write($"  /" + Colors.White);
-                nationality = Console.ReadLine();
-                if (nationality.Length == 1)
-                    nationality = nationality.ToUpper();
-                else if (nationality.IsNullOrEmpty())
-                    nationality = "Sealand";
-                else
-                    nationality = nationality.Remove(1).ToUpper() + nationality.Remove(0, 1).ToLower();
-                saveFileW.WriteLine(nationality);
-                saveFileW.Close();
-                Console.Write(Colors.White);
-                userData.Add(new Tuple<string, string, string, string, string>(firstName, lastName, fullName, shortName, nationality));
+                Console.Write($"{Colors.Teams()[2]}{blankSpace}    /{fullName}" + Colors.White + $"\n{blankSpace}   /Where are you from?" + '\n' + Colors.Teams()[2] + $"{blankSpace}  /" + Colors.White);
+                nationality = Console.ReadLine().Trim();
+                nationality = UserInfoAdjuster(nationality, UserInfoType.nationality);
+                userData[0] = new(firstName, lastName, fullName, shortName, nationality);
                 Console.SetCursorPosition(0, Console.CursorTop - 4);
+                try
+                {
+                    StreamWriter saveFileW = new(@$"{path}\UserData\SaveFile.txt");
+                    saveFileW.WriteLine(firstName);
+                    saveFileW.WriteLine(lastName);
+                    saveFileW.WriteLine(fullName);
+                    saveFileW.WriteLine(shortName);
+                    saveFileW.WriteLine(nationality);
+                    saveFileW.Close();
+                }
+                catch
+                {
+                    Console.WriteLine($"{Colors.White}Can't save user data\nCheck this path - " + @$"{Colors.Gold}{path}\UserData\SaveFile.txt{Colors.White}");
+                    Util.KeyAdvance(ConsoleKey.Enter);
+                    Util.ClearPart(0);
+                }
             }
             return userData;
+        }
+        private static string ShortNameCreator(string? firstName, string? lastName)
+        {
+            string? shortName;
+            if (lastName.Length == 3)
+                shortName = lastName;
+            else if (firstName.Length + lastName.Length < 3)
+                shortName = firstName + lastName;
+            else if (firstName.Length + lastName.Length == 3)
+                shortName = firstName + lastName;
+            else if (firstName.Length > 2 && lastName.Length < 3)
+                shortName = firstName.Remove(3);
+            else if (firstName.Length > 1 && lastName.Length == 1)
+                shortName = firstName.Remove(2) + lastName;
+            else if (firstName.Length > 1 && lastName.Length < 3)
+                shortName = firstName.Remove(1) + lastName;
+            else
+                shortName = lastName.Remove(3);
+            shortName = shortName.ToUpper();
+            return shortName;
+        }
+        private static string? UserInfoAdjuster(string? @string, UserInfoType userInfoType)
+        {
+            if (@string.IsNullOrEmpty())
+            {
+                if (userInfoType == UserInfoType.firstName)
+                    @string = "John";
+                else if (userInfoType == UserInfoType.lastName)
+                    @string = "Doe";
+                else if (userInfoType == UserInfoType.nationality)
+                    @string = "SeaLand";
+            }
+            else if (@string.Length == 1)
+                @string = @string.ToUpper();
+            else if (@string.Length > 13)
+                @string = @string.Remove(1).ToUpper() + @string.Remove(0, 1).Remove(13).ToLower();
+            else
+                @string = @string.Remove(1).ToUpper() + @string.Remove(0, 1).ToLower();
+            return @string;
+        }
+        private enum UserInfoType
+        {
+            firstName,
+            lastName,
+            nationality
         }
     }
     public class CircuitSelector
@@ -255,7 +271,6 @@ namespace F1_Season_2023_Ew
                         selCircuit = Math.Max(selCircuit - 1, minCircuit);
                     else if (key.Key == ConsoleKey.LeftArrow || key.Key == ConsoleKey.RightArrow)
                     {
-                        selCircuit = 0;
                         Console.Clear();
                         bonusCircuits = !bonusCircuits;
                         if (bonusCircuits)
@@ -289,12 +304,13 @@ namespace F1_Season_2023_Ew
             Data data = new();
             bool firtstDriverSeled = true;
             int userNumber = 1, selTeam = 0, replace;
+            var driverNumbers = Data.DriverNumbers();
             Console.Clear();
             do
             {
                 do
                 {
-                    Console.WriteLine(Colors.White + "Choose a Team & Who To Replace " + Colors.Teams()[selTeam] + data.UserData()[1].Item3 + '\n');
+                    Console.WriteLine(Colors.White + "Choose a team & who to replace " + Colors.Teams()[selTeam] + data.UserData()[0].Item3 + '\n');
                     for (int i = 0; i < Data.TeamList().Count; i++)
                     {
                         Console.Write(Colors.Teams()[i] + '|');
@@ -343,63 +359,47 @@ namespace F1_Season_2023_Ew
                     replace = selTeam * 2;
                 else
                     replace = selTeam * 2 + 1;
-                Console.WriteLine('\n' + Colors.Teams()[selTeam] + "|" + Colors.White + "Pick Your Number" + Colors.Teams()[selTeam] + "|");
-                bool numberPicked = false;
-                while (numberPicked == false)
+
+
+                Console.WriteLine('\n' + Colors.Teams()[selTeam] + "|" + Colors.White + "Pick your number" + Colors.Teams()[selTeam] + "|");
+                for (bool numberPicked = false; numberPicked == false;)
                 {
-                    if (Console.KeyAvailable)
-                        key = Console.ReadKey(false);
-                    for (int i = 0; i < Data.DriverData().Count; i++)
+                    for (int i = 0; driverNumbers.Contains(userNumber) && userNumber != driverNumbers[replace];)
                     {
-                        while (Data.DriverData()[i].Item4 == userNumber && i != replace)
-                        {
-                            i = 0;
+                        if (i > 19)
+                            userNumber--;
+                        else if (i < -19)
                             userNumber++;
-                        }
+                        else if (userNumber >= 50)
+                        { userNumber = Math.Max(userNumber - 1, 1); i--; }
+                        else if (userNumber < 50)
+                        { userNumber = Math.Min(userNumber + 1, 99); i++; }
                     }
+                    if (Console.KeyAvailable)
+                        Console.ReadKey(false);
                     Console.Write(Colors.Teams()[selTeam] + "\r└─┤" + Colors.LessGray + "   < ");
                     if (userNumber < 10)
                         Console.Write(Colors.Gray + 0);
                     Console.Write(Colors.Teams()[selTeam] + userNumber + Colors.LessGray + " >  " + Colors.Teams()[selTeam] + " ├─┘");
                     key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.DownArrow || key.Key == ConsoleKey.S)
-                    {
-                        if (userNumber < 12)
-                            userNumber = 1;
-                        else
-                            userNumber -= 10;
-                    }
+                        userNumber = Math.Max(userNumber - 10, 1);
                     else if (key.Key == ConsoleKey.UpArrow || key.Key == ConsoleKey.W)
-                    {
-                        if (userNumber > 89)
-                            userNumber = 99;
-                        else
-                            userNumber += 10;
-                    }
-                    else if ((key.Key == ConsoleKey.RightArrow || key.Key == ConsoleKey.D) && userNumber < 99)
-                        userNumber++;
-                    else if ((key.Key == ConsoleKey.LeftArrow || key.Key == ConsoleKey.A) && userNumber > 1)
-                        userNumber--;
-                    for (int i = 0; i < Data.DriverData().Count; i++)
-                    {
-                        while (Data.DriverData()[i].Item4 == userNumber && i != replace)
-                        {
-                            if ((key.Key == ConsoleKey.DownArrow || key.Key == ConsoleKey.S || key.Key == ConsoleKey.LeftArrow || key.Key == ConsoleKey.A) && userNumber > 2)
-                            {
-                                i = 0;
-                                userNumber--;
-                            }
-                            else if ((key.Key == ConsoleKey.UpArrow || key.Key == ConsoleKey.W || key.Key == ConsoleKey.RightArrow || key.Key == ConsoleKey.D) && userNumber < 99)
-                            {
-                                i = 0;
-                                userNumber++;
-                            }
-                            else
-                            {
-                                i = 0;
-                                userNumber++;
-                            }
-                        }
+                        userNumber = Math.Min(userNumber + 10, 99);
+                    else if (key.Key == ConsoleKey.RightArrow || key.Key == ConsoleKey.D)
+                        userNumber = Math.Min(userNumber + 1, 99);
+                    else if (key.Key == ConsoleKey.LeftArrow || key.Key == ConsoleKey.A)
+                        userNumber = Math.Max(userNumber - 1, 1);
+                    for (int i = 0; driverNumbers.Contains(userNumber) && userNumber != driverNumbers[replace];)
+                    {                        
+                        if (i > 19)
+                            userNumber--;
+                        else if (i < -19)
+                            userNumber++;
+                        else if (key.Key == ConsoleKey.DownArrow || key.Key == ConsoleKey.S || key.Key == ConsoleKey.LeftArrow || key.Key == ConsoleKey.A)
+                        { userNumber = Math.Max(userNumber - 1, 1); i--; }
+                        else if (key.Key == ConsoleKey.UpArrow || key.Key == ConsoleKey.W || key.Key == ConsoleKey.RightArrow || key.Key == ConsoleKey.D)
+                        { userNumber = Math.Min(userNumber + 1, 99); i++; }
                     }
                     if (key.Key == ConsoleKey.Enter)
                         numberPicked = true;
@@ -413,9 +413,7 @@ namespace F1_Season_2023_Ew
                 }
             } while (key.Key == ConsoleKey.Escape);
             var userTeamChoice = new List<Tuple<int, int>>
-            {
-                new Tuple<int, int>(replace, userNumber),
-            };
+            { new Tuple<int, int>(replace, userNumber) };
             return userTeamChoice;
         }
     }
@@ -480,12 +478,12 @@ namespace F1_Season_2023_Ew
                                 }
                             }
                             if (raceRnd == 0)
-                                raceRnd = rnd.Next(5, 10);
+                                raceRnd = rnd.Next(5, 9);
                             raceRndDouble = rnd.NextDouble();
                             if (driverDNF)
                                 lineup[j] = new KeyValuePair<int, double>(driver[i].Item4, raceRnd + raceRndDouble);
                             else
-                                lineup[j] = new KeyValuePair<int, double>(driver[i].Item4, (j + 1.2) * (1.1 + raceRndDouble) + (driver[i].Item6.Item2 / 1.69 - raceRnd * (raceRndDouble * 3.71)));
+                                lineup[j] = new KeyValuePair<int, double>(driver[i].Item4, (j + 1.4) * (1 + raceRndDouble) + (driver[i].Item6.Item2 / 1.5 - raceRnd * (raceRndDouble * 3.5)));
                             break;
                         }
                     }
@@ -507,7 +505,7 @@ namespace F1_Season_2023_Ew
     }
     public class QuickRace
     {
-        public static void NormalRace(bool random)
+        public static void NormalRace(bool randomStart)
         {
             Data data = new();
             Random rnd = new();
@@ -520,7 +518,7 @@ namespace F1_Season_2023_Ew
             int circuit = rnd.Next(Data.CircuitData().Count);
             var userTeamNumber = new List<Tuple<int, int>>
             { new Tuple<int, int>(rnd.Next(Data.DriverData().Count), rndNumber) };
-            if (random == false) {
+            if (randomStart == false) {
                 circuit = CircuitSelector.CircuitListing();
                 userTeamNumber = TeamSelector.TeamListing(); }
             int qualifying = QPlayOrSkip.PlayOrSkipQ(circuit, userTeamNumber[0].Item1 / 2);
@@ -540,22 +538,22 @@ namespace F1_Season_2023_Ew
                             Console.Write(userTeamColor + "Starting Lineup");
                             if (userTeamNumber[0].Item1 / 2 == 9)
                                 Console.Write(Colors.Teams()[2] + " <");
-                            Console.WriteLine(Colors.White + "\nCircuit View  \nWeather Forcast  \nStart the Race  ");
+                            Console.WriteLine(Colors.LessGray + "\nCircuit View  \nWeather Forcast  \nStart the Race  ");
                             break;
                         case 2:
-                            Console.Write(Colors.White + "Starting Lineup  " + '\n' + userTeamColor + "Circuit View");
+                            Console.Write(Colors.LessGray + "Starting Lineup  " + '\n' + userTeamColor + "Circuit View");
                             if (userTeamNumber[0].Item1 / 2 == 9)
                                 Console.Write(Colors.Teams()[2] + " <");
-                            Console.WriteLine(Colors.White + "\nWeather Forcast  \nStart the Race  ");
+                            Console.WriteLine(Colors.LessGray + "\nWeather Forcast  \nStart the Race  ");
                             break;
                         case 3:
-                            Console.Write(Colors.White + "Starting Lineup  \nCircuit View  " + '\n' + userTeamColor + "Weather Forcast");
+                            Console.Write(Colors.LessGray + "Starting Lineup  \nCircuit View  " + '\n' + userTeamColor + "Weather Forcast");
                             if (userTeamNumber[0].Item1 / 2 == 9)
                                 Console.Write(Colors.Teams()[2] + " <");
-                            Console.WriteLine(Colors.White + "\nStart the Race  ");
+                            Console.WriteLine(Colors.LessGray + "\nStart the Race  ");
                             break;
                         case 4:
-                            Console.Write(Colors.White + "Starting Lineup  \nCircuit View  \nWeather Forcast  " + '\n' + userTeamColor + "Start the Race");
+                            Console.Write(Colors.LessGray + "Starting Lineup  \nCircuit View  \nWeather Forcast  " + '\n' + userTeamColor + "Start the Race");
                             if (userTeamNumber[0].Item1 / 2 == 9)
                                 Console.WriteLine(Colors.Teams()[2] + " <");
                             else
@@ -573,7 +571,7 @@ namespace F1_Season_2023_Ew
                 {
                     Util.ClearPart(0);
                     Console.WriteLine(Colors.Gray + "Sunday, " + Data.CircuitData()[circuit].Item3 + ' ' + Data.CircuitData()[circuit].Item4 + ", " + 2023 + '\n' + Colors.White + Data.CircuitData()[circuit].Item5 + " Grand Prix " + userTeamColor + ">" + Colors.White + " Race " + userTeamColor + ">" + Colors.White + " Starting Lineup\n" + Colors.Gray + Data.CircuitData()[circuit].Item2 + '\n');
-                    #region
+                    #region display grid
                     Console.SetCursorPosition(0, 24);
                     Console.WriteLine(Colors.Dark + "[Space] to speed up");
                     Console.SetCursorPosition(0, 4);
@@ -600,10 +598,10 @@ namespace F1_Season_2023_Ew
                                         Console.Write(" ");
                                     if (j == userTeamNumber[0].Item1)
                                     {
-                                        Console.Write(number + Colors.Teams()[j / 2] + $"|" + $"\x1b[38;5;{i}m" + data.UserData()[1].Item4 + " ");
+                                        Console.Write(number + Colors.Teams()[j / 2] + $"|" + $"\x1b[38;5;{i}m" + data.UserData()[0].Item4 + " ");
                                         if (userTeamNumber[0].Item2 < 10)
                                             Console.Write(" ");
-                                        Console.WriteLine(Colors.Teams()[j / 2] + userTeamNumber[0].Item2 + $"\x1b[38;5;{i - 2}m " + data.UserData()[1].Item3 + Colors.Teams()[j / 2] + " <");
+                                        Console.WriteLine(Colors.Teams()[j / 2] + userTeamNumber[0].Item2 + $"\x1b[38;5;{i - 2}m " + data.UserData()[0].Item3 + Colors.Teams()[j / 2] + " <");
                                     }
                                     else
                                     {
@@ -654,7 +652,7 @@ namespace F1_Season_2023_Ew
                         else
                             Console.SetCursorPosition(18, Console.CursorTop);
                         if (j == userTeamNumber[0].Item1)
-                        { Console.WriteLine($"{data.UserData()[1].Item4}{Colors.Teams()[j / 2]}⌠{Colors.Dark}{data.UserData()[1].Item3}"); userKey = startingLineup[i].Key; }
+                        { Console.WriteLine($"{data.UserData()[0].Item4}{Colors.Teams()[j / 2]}⌠{Colors.Dark}{data.UserData()[0].Item3}"); userKey = startingLineup[i].Key; }
                         else
                             Console.WriteLine($"{Data.DriverData()[j].Item3}{Colors.Teams()[j / 2]}⌠{Colors.Darker}{Data.DriverData()[j].Item2}");
                         break;
@@ -667,98 +665,140 @@ namespace F1_Season_2023_Ew
 
             int newPos = 0, oldPos = 0, score = 0, totalLaps = Data.CircuitData()[circuit].Item7, pitCount = 0, noRepeats = 0, randomMiniGame = 0, miniGameCounter = 1, winner = 0, flHolder = 0;
             string posIndicator;
-            bool fLPlayed = false, userDNF = false;
+            Assets.Flag flag = Assets.Flag.Green, lastFlag = Assets.Flag.Green;
+            bool fLPlayed = false, userDNF = false, redFlag = false, yellowFlag = false;
             var listDNF = new List<KeyValuePair<int, double>> { };
             for (int lap = 1; lap <= Data.CircuitData()[circuit].Item7;)
             {
-                Console.WriteLine(Colors.Gray + $"{listDNF.Count}Sunday, " + Data.CircuitData()[circuit].Item3 + ' ' + Data.CircuitData()[circuit].Item4 + ", " + 2023 + '\n' + Colors.White + Data.CircuitData()[circuit].Item5 + " Grand Prix " + userTeamColor + ">" + Colors.White + " Race " + userTeamColor + ">" + Colors.White + $" Lap {lap}/{totalLaps}\n");
-                if (userDNF == false)
+                Console.WriteLine(Colors.Gray + $"Sunday, " + Data.CircuitData()[circuit].Item3 + ' ' + Data.CircuitData()[circuit].Item4 + ", " + 2023 + '\n' + Colors.White + Data.CircuitData()[circuit].Item5 + " Grand Prix " + userTeamColor + ">" + Colors.White + " Race " + userTeamColor + ">" + Colors.White + $" Lap {lap}/{totalLaps}\n");
+                int listDNFLast = listDNF.Count;
+
+                if (flag == Assets.Flag.Green && lastFlag == Assets.Flag.Green)
                 {
-                    while (randomMiniGame == noRepeats)
-                    { randomMiniGame = rnd.Next(3); }
-                    Console.Write($"{Colors.White}Challenge {miniGameCounter} · ");
-                    miniGameCounter++;
-                    Util.ClearKey();
-                    if (lap == 1)
-                    { score = MiniGames.RedLights(); lap++; }
-                    else if (randomMiniGame == 0 && lap > 3 && oldPos != 1)
-                        score = MiniGames.DRS();
-                    else if (randomMiniGame == 1 && lap > totalLaps / 3 && (pitCount == 0 || pitCount == 4) && lap < totalLaps - totalLaps / 10)
-                    { score = MiniGames.BoxBox(); pitCount++; }
-                    else if (randomMiniGame == 2 && lap > totalLaps / 2 && !fLPlayed)
-                    { score = MiniGames.FastestLap(circuit); fLPlayed = true; flHolder = userKey; }
-                    else
+                    if (userDNF == false)
                     {
-                        do
-                        {
-                            randomMiniGame = rnd.Next(4, 6);
-                        } while (randomMiniGame == noRepeats);
-                        if (randomMiniGame == 4)
-                            score = MiniGames.GearUp(9);
+                        while (randomMiniGame == noRepeats)
+                        { randomMiniGame = rnd.Next(2); }
+                        Util.ClearKey();
+                        Console.Write($"\r{Colors.White}Challenge {miniGameCounter} · ");
+                        miniGameCounter++;
+                        if (lap == 1 || redFlag)
+                        { score = MiniGames.RedLights(); redFlag = false; }
+                        else if (randomMiniGame == 0 && lap > 3 && newPos != 0)
+                            score = MiniGames.DRS();
+                        else if (randomMiniGame == 1 && lap > totalLaps / 3 && (pitCount == 0 || pitCount == 4) && lap < totalLaps - totalLaps / 10)
+                        { score = MiniGames.BoxBox(); pitCount++; }
+                        else if (lap > totalLaps / 2 && !fLPlayed)
+                        { score = MiniGames.FastestLap(circuit); fLPlayed = true; if (score > 2) flHolder = userKey; }
                         else
-                            score = MiniGames.Speed();
-                    }
-                    if (pitCount > 0 && pitCount == 4)
-                        pitCount++;
-                    noRepeats = randomMiniGame;
-                }
-                Util.ClearKey();
-                driver.Sort((x, y) => y.Item6.Item4.CompareTo(x.Item6.Item4));
-                for (int i = 0; i < driver.Count; i++)
-                {
-                    int randomDNF = rnd.Next(7700 - WeatherSet.DNFModifier(weather));
-                    if (driver[i].Item6.Item4 * 10 + 2 > randomDNF && driver[i].Item4 != userKey)
-                    {
-                        double rndDouble = rnd.NextDouble();
-                        listDNF.Add(new KeyValuePair<int, double>(driver[i].Item4, (totalLaps + 10 - lap) * 1000 + rndDouble));
-                    }
-                }
-                for (int i = 0; i < lineup.Count; i++)
-                {
-                    if (lineup[i].Key == userKey && userDNF == false)
-                    {
-                        if (score <= -7)
                         {
-                            Console.WriteLine(Colors.Teams()[2] + "\rYou're out of the race" + Colors.Dark + " [Enter]                            ");
-                            Util.KeyAdvance(ConsoleKey.Enter);
+                            do
+                            {
+                                randomMiniGame = rnd.Next(4, 6);
+                            } while (randomMiniGame == noRepeats);
+                            if (randomMiniGame == 4)
+                                score = MiniGames.GearUp(9);
+                            else
+                                score = MiniGames.Speed();
+                        }
+                        if (pitCount > 0 && pitCount == 4)
+                            pitCount++;
+                        noRepeats = randomMiniGame;
+                    }
+                    Util.ClearKey();
+
+
+                    driver.Sort((x, y) => y.Item6.Item4.CompareTo(x.Item6.Item4));
+                    for (int i = 0; i < driver.Count; i++)
+                    {
+                        int randomDNF = rnd.Next(7500 - WeatherSet.DNFModifier(weather));
+                        if (driver[i].Item6.Item4 * 10 + 2 > randomDNF && driver[i].Item4 != userKey)
+                        {
                             double rndDouble = rnd.NextDouble();
-                            userDNF = true;
-                            listDNF.Add(new KeyValuePair<int, double>(userKey, lap * 1000 + rndDouble));
-                            newPos = 20 - listDNF.Count;
-                        }
-                        else 
-                            newPos = Math.Max(0, Math.Min(i - score, 19 - listDNF.Count));
-                        oldPos = i;
-                        break;
-                    }
-                }
-                Util.ClearPart(3);
-                lineup = LineupGenerator.RaceLineup(userKey, newPos, lineup, listDNF);
-                driver.Sort((x, y) => y.Item6.Item3.CompareTo(x.Item6.Item3));
-                int flNumber = 0, randomFL = rnd.Next(170);
-                for (int i = 0; i < driver.Count && flHolder != userKey; i++)
-                {
-                    bool driverDNF = false;
-                    flNumber += driver[i].Item6.Item3 * 5 + 5;
-                    for (int j = 0; j < listDNF.Count; j++)
-                    {
-                        if (listDNF[j].Key == driver[i].Item4)
-                        {  
-                            driverDNF = true;
-                            break;
+                            listDNF.Add(new KeyValuePair<int, double>(driver[i].Item4, (totalLaps + 10 - lap) * 1000 + rndDouble));
                         }
                     }
-                    if (driverDNF == false && driver[i].Item4 != userKey)
+
+
+                    for (int i = 0; i < lineup.Count; i++)
                     {
-                        if (driver[i].Item4 == flHolder)
-                            randomFL -= (driver[i].Item6.Item3 + 4) * 4;
-                        if (randomFL <= flNumber)
+                        if (lineup[i].Key == userKey && userDNF == false)
                         {
-                            flHolder = driver[i].Item4;
+                            if (score <= -7)
+                            {
+                                Console.WriteLine(Colors.Teams()[2] + "\rYou're out of the race" + Colors.Dark + " [Enter]                            ");
+                                Util.KeyAdvance(ConsoleKey.Enter);
+                                double rndDouble = rnd.NextDouble();
+                                userDNF = true;
+                                listDNF.Add(new KeyValuePair<int, double>(userKey, lap * 1000 + rndDouble));
+                                newPos = 20 - listDNF.Count;
+                            }
+                            else
+                                newPos = Math.Max(0, Math.Min(i - score, 19 - listDNF.Count));
+                            oldPos = i;
                             break;
                         }
                     }
+
+                    if (listDNF.Count - listDNFLast > 2 && lap < totalLaps / 4)
+                    { flag = Assets.Flag.Red; redFlag = true; }
+                    else if (listDNF.Count - listDNFLast > 1)
+                    { flag = Assets.Flag.Yellow; yellowFlag = true; }
+
+                    lineup = LineupGenerator.RaceLineup(userKey, newPos, lineup, listDNF);
+
+                    driver.Sort((x, y) => y.Item6.Item3.CompareTo(x.Item6.Item3));
+                    int flNumber = 0, randomFL = rnd.Next(170);
+                    for (int i = 0; i < driver.Count && flHolder != userKey && lap != 1; i++)
+                    {
+                        bool driverDNF = false;
+                        flNumber += driver[i].Item6.Item3 * 5 + 5;
+                        for (int j = 0; j < listDNF.Count; j++)
+                        {
+                            if (listDNF[j].Key == driver[i].Item4)
+                            {
+                                driverDNF = true;
+                                break;
+                            }
+                        }
+                        if (driverDNF == false && driver[i].Item4 != userKey)
+                        {
+                            if (driver[i].Item4 == flHolder)
+                                randomFL -= (driver[i].Item6.Item3 + 4) * 4;
+                            if (randomFL <= flNumber)
+                            {
+                                flHolder = driver[i].Item4;
+                                break;
+                            }
+                        }
+                    }
                 }
+
+                if (lap == totalLaps)
+                {
+                    Console.SetCursorPosition(0, 2);
+                    Console.Write(Colors.Grayer + "▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+                }
+                if (flag == Assets.Flag.Yellow)
+                {
+                    Console.SetCursorPosition(0, 2);
+                    Console.Write($"\r{Colors.Custom(220, 217, 2)}VIRTUAL SAFETY CAR");
+                }
+                else if (flag == Assets.Flag.Red)
+                {
+                    Console.SetCursorPosition(0, 2);
+                    Console.Write($"\r{Colors.Custom(235, 20, 10)}RED FLAG");
+                }
+                else if (flag == Assets.Flag.Green && yellowFlag == true)
+                {
+                    yellowFlag = false;
+                    Console.SetCursorPosition(0, 2);
+                    Console.Write($"\r{Colors.Custom(40, 240, 44)}GREEN FLAG");
+                }
+
+                lastFlag = flag;
+                flag = Assets.Flag.Green;
+
                 if (userDNF)
                     posIndicator = Colors.Gray + "OUT" + Colors.Custom(0, 0, 0);
                 else if (oldPos == newPos)
@@ -767,6 +807,9 @@ namespace F1_Season_2023_Ew
                     posIndicator = Colors.Teams()[2] + "▼" + Colors.Custom(120, 0, 0);
                 else
                     posIndicator = Colors.Green + "▲" + Colors.Custom(0, 120, 0);
+                Util.ClearPart(3);
+
+                Console.SetCursorPosition(0, 3);
                 for (int i = 0; i < 20; i++)
                 {
                     Console.Write(Colors.White);
@@ -779,10 +822,7 @@ namespace F1_Season_2023_Ew
                                 fl = Colors.Magenta + "♦";
                             if (lap == totalLaps && i == 0)
                             {
-                                if (j == userTeamNumber[0].Item1)
-                                    winner = 20;
-                                else
-                                    winner = j;
+                                winner = j;
                             }
                             string space = "";
                             if (i < 9)
@@ -795,13 +835,15 @@ namespace F1_Season_2023_Ew
                                     break; }
                             }
                             if (j == userTeamNumber[0].Item1)
-                                Console.WriteLine($"{partOne}{data.UserData()[1].Item4}{fl}{Colors.Teams()[j / 2]}|{Colors.Dark}{data.UserData()[1].Item3} {posIndicator + " " + (oldPos - newPos)}");
+                                Console.WriteLine($"{partOne}{data.UserData()[0].Item4}{fl}{Colors.Teams()[j / 2]}|{Colors.Dark}{data.UserData()[0].Item3} {posIndicator + " " + (oldPos - newPos)}");
                             else
                                 Console.WriteLine($"{partOne}{Data.DriverData()[j].Item3}{fl}{Colors.Teams()[j / 2]}|{Colors.Darker}{Data.DriverData()[j].Item2}");
                             break;
                         }
                     }
                 }
+
+
                 Util.ClearKey();
                 Util.KeyAdvance(ConsoleKey.Enter);
                 Util.ClearPart(0);
@@ -810,193 +852,445 @@ namespace F1_Season_2023_Ew
                 else
                     lap = Math.Min(totalLaps, lap + totalLaps / 10);
             }
-            Play.Anthem(winner);
+            Play.RunningLineStringBuilder(lineup, userKey, flHolder);
+            Play.RaceEndScreen(lineup, userKey, userTeamNumber[0].Item2);
+            Play.Anthem(winner, circuit, userTeamNumber[0].Item1);
         }
     }
     public class Play
     {
-        public static void Anthem(int winner)
+        public static string[] Flag(string country)
+        {
+            string[] flag = new string[6];
+            country = country.ToLower();
+            switch (country)
+            {
+                case "monaco":
+                    flag[0] = flag[1] = flag[2] = Colors.Custom(206, 17, 38) + "█████████";
+                    flag[3] = flag[4] = flag[5] = Colors.White + "█████████";
+                    break;
+                case "poland":
+                    flag[0] = flag[1] = flag[2] = Colors.White + "█████████";
+                    flag[3] = flag[4] = flag[5] = Colors.Custom(220, 20, 60) + "█████████";
+                    break;
+                case "ukraine":
+                    flag[0] = flag[1] = flag[2] = Colors.Custom(0, 87, 183) + "█████████";
+                    flag[3] = flag[4] = flag[5] = Colors.Custom(255, 221, 0) + "█████████";
+                    break;
+                case "united states": 
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = Colors.Custom(179, 25, 66) + "\x1b[48;5;255m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = Colors.Custom(179, 25, 66) + "▀▀▀▀▀▀▀▀▀";
+                    break;
+                case "spain":
+                    flag[5] = flag[0] = Colors.Custom(170, 21, 27) + "█████████";
+                    flag[2] = flag[3] = Colors.Custom(241, 191, 0) + "█████████";
+                    flag[1] = Colors.Custom(170, 21, 27) + "\x1b[48;2;241;191;0m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = Colors.Custom(170, 21, 27) + "\x1b[48;2;241;191;0m" + "▄▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "mexico":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.White + "███" + Colors.Custom(206, 17, 37) + "██████";
+                    flag[2] = flag[3] = Colors.Custom(75, 35, 20) + "█" + Colors.White + "██" + Colors.Custom(206, 17, 37) + "██████";
+                    break;
+                case "france":
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = flag[5] = Colors.White + "███" + Colors.Custom(237, 41, 57) + "██████";
+                    break;
+                case "italy":
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = flag[5] = Colors.White + "███" + Colors.Custom(205, 33, 42) + "██████";
+                    break;
+                case "belgium":
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = flag[5] = Colors.Custom(255, 205, 0) + "███" + Colors.Custom(200, 16, 46) + "██████";
+                    break;
+                case "ireland":
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = flag[5] = Colors.White + "███" + Colors.Custom(255, 130, 0) + "██████";
+                    break;
+                case "qatar":
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = flag[5] = Colors.White + "\x1b[48;2;138;21;56m" + "►        " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White; ;
+                    break;
+                case "bahrain":
+                    flag[0] = flag[1] = flag[2] = flag[3] = flag[4] = flag[5] = Colors.White + "\x1b[48;2;206;17;38m" + "►        " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White; ;
+                    break;
+                case "china":
+                    flag[0] = flag[3] = Colors.Custom(255, 255, 0) + "\x1b[48;2;238;28;37m" + "   ·     " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = Colors.Custom(255, 255, 0) + "\x1b[48;2;238;28;37m" + " ♦  ·    " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(255, 255, 0) + "\x1b[48;2;238;28;37m" + "    ·    " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = flag[5] = Colors.Custom(238, 28, 37) + "█████████";
+                    break;
+                case "united kingdom":
+                    flag[0] = "\x1b[48;5;255m" + Colors.Custom(200, 16, 46) + "█" + Colors.White + "█" + Colors.Custom(1, 33, 105) + "▀" + Colors.Custom(200, 16, 46) + " ▄█▀ " + Colors.Custom(1, 33, 105) + "▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = "\x1b[48;5;255m" + Colors.Custom(200, 16, 46) + "█" + Colors.White + "█" + Colors.Custom(200, 16, 46)+ "▄█▀ " + Colors.Custom(1, 33, 105) + "▄██" +"\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = "\x1b[48;5;255m" + Colors.Custom(200, 16, 46) + "\x1b[48;5;255m" + "█▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = "\x1b[48;5;255m" + Colors.Custom(200, 16, 46) + "\x1b[48;5;255m" + "█▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = "\x1b[48;5;255m" + Colors.Custom(200, 16, 46) + "█" + Colors.White + "█" + Colors.Custom(1, 33, 105) + "█▄ " + Colors.Custom(200, 16, 46) + "▀█▄ " +"\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = "\x1b[48;5;255m" + Colors.Custom(200, 16, 46) + "█" + Colors.White + "█" + Colors.Custom(200, 16, 46) + " ▀█▄ " + Colors.Custom(1, 33, 105) + "▀█" +"\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "austria":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.Custom(239, 51, 64) + "█████████";
+                    flag[2] = flag[3] = Colors.White + "█████████";
+                    break;
+                case "argentina":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.Custom(108, 172, 228) + "█████████";
+                    flag[2] = Colors.Custom(255, 184, 28) + "\x1b[48;5;255m" + "(☻)      " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.White + "█████████";
+                    break;
+                case "netherlands":
+                    flag[0] = flag[1] = Colors.Custom(169, 31, 50) + "█████████";
+                    flag[2] = flag[3] = Colors.White + "█████████";
+                    flag[4] = flag[5] = Colors.Custom(30, 71, 133) + "█████████";
+                    break;
+                case "hungary":
+                    flag[0] = flag[1] = Colors.Custom(206, 41, 57) + "█████████";
+                    flag[2] = flag[3] = Colors.White + "█████████";
+                    flag[4] = flag[5] = Colors.Custom(71, 112, 80) + "█████████";
+                    break;
+                case "thailand":
+                    flag[0] = flag[5] = Colors.Custom(239, 51, 64) + "█████████";
+                    flag[1] = flag[4] = Colors.White + "█████████";
+                    flag[2] = flag[3] = Colors.Custom(0, 36, 125) + "█████████";
+                    break;
+                case "germany":
+                    flag[0] = flag[1] = Colors.Custom(10, 10, 10) + "█████████";
+                    flag[2] = flag[3] = Colors.Custom(221, 0, 0) + "█████████";
+                    flag[4] = flag[5] = Colors.Custom(255, 204, 0) + "█████████";
+                    break;
+                case "lithuania":
+                    flag[0] = flag[1] = Colors.Custom(255, 184, 28) + "█████████";
+                    flag[2] = flag[3] = Colors.Custom(4, 106, 56) + "█████████";
+                    flag[4] = flag[5] = Colors.Custom(190, 58, 52) + "█████████";
+                    break;
+                case "estonia":
+                    flag[0] = flag[1] = Colors.Custom(0, 114, 206) + "█████████";
+                    flag[2] = flag[3] = Colors.Custom(6, 6, 6) + "█████████";
+                    flag[4] = flag[5] = Colors.White + "█████████";
+                    break;
+                case "georgia":
+                    flag[0] = Colors.Custom(255, 0, 0) + "\x1b[48;5;255m" + "█    ▄   " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = Colors.Custom(255, 0, 0) + "\x1b[48;5;255m" + "█   ▀█▀  " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(255, 0, 0) + "\x1b[48;5;255m" + "█▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(255, 0, 0) + "\x1b[48;5;255m" + "█▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = Colors.Custom(255, 0, 0) + "\x1b[48;5;255m" + "█   ▄█▄  " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = Colors.Custom(255, 0, 0) + "\x1b[48;5;255m" + "█    ▀   " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "sealand":
+                    flag[0] = Colors.Custom(200, 50, 50) + "\x1b[48;5;255m" + "███████▀ " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = Colors.Custom(200, 50, 50) + "\x1b[48;5;255m" + "█████▀   " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(200, 50, 50) + "\x1b[48;5;255m" + "███▀   " + Colors.Custom(10, 10, 10) + "▄█" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(200, 50, 50) + "\x1b[48;5;255m" + "█▀   " + Colors.Custom(10, 10, 10) + "▄███" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = Colors.Custom(10, 10, 10) + "\x1b[48;5;255m" + "   ▄█████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = Colors.Custom(10, 10, 10) + "\x1b[48;5;255m" + " ▄███████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "brazil":
+                    flag[0] = "\x1b[48;2;254;221;0m" + Colors.Custom(0, 151, 57) + "▀▀███████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = "\x1b[48;2;254;221;0m" + Colors.Custom(1, 33, 105) + "▄▄ " + Colors.Custom(0, 151, 57) + "▀█████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = "\x1b[48;2;254;221;0m" + Colors.Custom(1, 33, 105) + "███  " + Colors.Custom(0, 151, 57) + "▀███" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = "\x1b[48;2;254;221;0m" + Colors.Custom(1, 33, 105) + "███  " + Colors.Custom(0, 151, 57) + "▄███" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = "\x1b[48;2;254;221;0m" + Colors.Custom(1, 33, 105) + "▀▀ " + Colors.Custom(0, 151, 57) + "▄█████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = "\x1b[48;2;254;221;0m" + Colors.Custom(0, 151, 57) + "▄▄███████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "switzerland":
+                    flag[0] = flag[5] = Colors.Custom(218, 41, 28) + "██████";
+                    flag[1] = flag[4] = Colors.White + "█" + Colors.Custom(218, 41, 28) + "█████";
+                    flag[2] = Colors.White + "\x1b[48;2;218;41;28m" + "█▄▄▄  " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.White + "\x1b[48;2;218;41;28m" + "█▀▀▀  " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "canada":
+                    flag[0] = flag[5] = Colors.White + "█████" + Colors.Custom(216, 6, 33) + "████";
+                    flag[1] = Colors.Custom(216, 6, 33) + "\x1b[48;5;255m" + "█▄   ████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(216, 6, 33) + "\x1b[48;5;255m" + "██▄█ ████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(216, 6, 33) + "\x1b[48;5;255m" + "███▄ ████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = Colors.Custom(216, 6, 33) + "\x1b[48;5;255m" + "▌    ████" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "japan":
+                    flag[0] = flag[5] = Colors.White + "█████████";
+                    flag[1] = Colors.Custom(188, 0, 45) + "\x1b[48;5;255m" + "▄▄       " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(188, 0, 45) + "\x1b[48;5;255m" + "███▄     " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(188, 0, 45) + "\x1b[48;5;255m" + "███▀     " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[4] = Colors.Custom(188, 0, 45) + "\x1b[48;5;255m" + "▀▀       " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "australia":
+                    flag[0] = flag[4] = Colors.Custom(255, 255, 255) + "\x1b[48;2;1;33;105m" + "   ♦     " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = Colors.Custom(255, 255, 255) + "\x1b[48;2;1;33;105m" + "     ♦   " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(255, 255, 255) + "\x1b[48;2;1;33;105m" + " ♦  ․    " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = flag[3] = Colors.Custom(1, 33, 105) + "█████████";
+                    break;
+                case "new zealand":
+                    flag[0] = flag[4] = Colors.Custom(200, 16, 46) + "\x1b[48;2;1;33;105m" + "   ♦     " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[1] = Colors.Custom(200, 16, 46) + "\x1b[48;2;1;33;105m" + "     ♦   " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(200, 16, 46) + "\x1b[48;2;1;33;105m" + " ♦  ․    " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[5] = flag[3] = Colors.Custom(1, 33, 105) + "█████████";
+                    break;
+                case "finland":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.White + "█████████";
+                    flag[2] = Colors.Custom(0, 47, 108) + "\x1b[48;5;255m" + "▄▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(0, 47, 108) + "\x1b[48;5;255m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "denmark":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.Custom(200, 16, 46) + "█████████";
+                    flag[3] = Colors.Custom(200, 16, 46) + "\x1b[48;5;255m" + "▄▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(200, 16, 46) + "\x1b[48;5;255m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "sweden":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.Custom(0, 106, 167) + "█████████"; 
+                    flag[2] = Colors.Custom(254, 204, 2) + "\x1b[48;2;0;106;167m" + "▄▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(254, 204, 2) + "\x1b[48;2;0;106;167m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "latvia":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.Custom(164, 52, 58) + "█████████";
+                    flag[3] = Colors.Custom(164, 52, 58) + "\x1b[48;5;255m" + "▄▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[2] = Colors.Custom(164, 52, 58) + "\x1b[48;5;255m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                case "norway":
+                    flag[0] = flag[1] = flag[4] = flag[5] = Colors.Custom(186, 12, 47) + "█████████";
+                    flag[2] = Colors.Custom(0, 32, 91) + "\x1b[48;5;255m" + "▄▄▄▄▄▄▄▄▄" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[3] = Colors.Custom(0, 32, 91) + "\x1b[48;5;255m" + "▀▀▀▀▀▀▀▀▀" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+                default:
+                    flag[1] = flag[3] = flag[5] = Colors.Darker + "\x1b[48;5;255m" + "█  ██  ██" + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    flag[0] = flag[2] = flag[4] = Colors.Darker + "\x1b[48;5;255m" + " ██  ██  " + "\x1b[48;2;0;0;0m" + Colors.Custom(0, 0, 0) + '█' + Colors.White;
+                    break;
+            }
+            return flag;
+        }
+        public static void RaceEndScreen(List<KeyValuePair<int, double>> lineup, int userKey, int userNumber)
+        {
+            Data data = new();
+            int[] keys = new int[3];
+            string[] nums = new string[3], names = new string[3], countries = new string[3], teams = new string[3];
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 20; j++)
+                {
+                    if (lineup[i].Key == Data.DriverData()[j].Item4)
+                    {
+                        keys[i] = j;
+                        if (Data.DriverData()[j].Item4 == userKey)
+                        {
+                            nums[i] = userNumber.ToString();
+                            names[i] = data.UserData()[0].Item3 + "";
+                            countries[i] = data.UserData()[0].Item5 + "";
+                        }
+                        else
+                        {
+                            nums[i] = Data.DriverData()[j].Item4.ToString();
+                            names[i] = Data.DriverData()[j].Item2;
+                            countries[i] = Data.DriverData()[j].Item5;
+                        }
+                        if (nums[i].Length == 1)
+                            nums[i] = Colors.Teams()[j / 2] + nums[i] + " " + Colors.White;
+                        else
+                            nums[i] = Colors.Teams()[j / 2] + nums[i] + Colors.White;
+                        string[] capsName = names[i].Split(' ' , 2);
+                        if (j == 17 && Data.DriverData()[j].Item4 != userKey)
+                            names[i] = capsName[0].ToUpper() + " " + capsName[1];
+                        else
+                            names[i] = capsName[0] + " " + capsName[1].ToUpper();
+                        while (names[i].Length < 21)
+                            names[i] = names[i] + " ";
+                        teams[i] = Colors.Teams()[j / 2] + Data.DriverData()[j].Item1 + Colors.White;
+                    }
+                }
+            }
+            Console.WriteLine("" + Colors.White + 
+                "───────────────────────┐" + '\n' + 
+                          $" {names[0]} │" + Flag(countries[0])[0] + '\n' + 
+        $" {nums[0]}     {Colors.Teams()[keys[0] / 2]}_______{Colors.White}        │" + Flag(countries[0])[1] + '\n' +
+              $@"       {Colors.Teams()[keys[0] / 2]}_\═.o.═/_{Colors.White}       │" + Flag(countries[0])[2] + '\n' +
+               $"      {Colors.Teams()[keys[0] / 2]}|_|_____|_|{Colors.White}      │" + Flag(countries[0])[3] + '\n' + Colors.White +
+                "                    /  │" + Flag(countries[0])[4] + '\n' + 
+                 $"  {teams[0]}     / st│" + Flag(countries[0])[5] + '\n' + Colors.White +
+                "───────────────────────┤" + '\n' + 
+                          $" {names[1]} │" + Flag(countries[1])[0] + '\n' + 
+        $" {nums[1]}     {Colors.Teams()[keys[1] / 2]}_______{Colors.White}        │" + Flag(countries[1])[1] + '\n' +
+              $@"       {Colors.Teams()[keys[1] / 2]}_\═.o.═/_{Colors.White}       │" + Flag(countries[1])[2] + '\n' +
+               $"      {Colors.Teams()[keys[1] / 2]}|_|_____|_|{Colors.White}  __  │" + Flag(countries[1])[3] + '\n' + Colors.White +
+                "                   _/  │" + Flag(countries[1])[4] + '\n' +
+                 $"  {teams[1]}    /_ nd│" + Flag(countries[1])[5] + '\n' + Colors.White +
+                "───────────────────────┤" + '\n' +
+                          $" {names[2]} │" + Flag(countries[2])[0] + '\n' +
+        $" {nums[2]}     {Colors.Teams()[keys[2] / 2]}_______{Colors.White}        │" + Flag(countries[2])[1] + '\n' +
+              $@"       {Colors.Teams()[keys[2] / 2]}_\═.o.═/_{Colors.White}       │" + Flag(countries[2])[2] + '\n' +
+               $"      {Colors.Teams()[keys[2] / 2]}|_|_____|_|{Colors.White}  _   │" + Flag(countries[2])[3] + '\n' + Colors.White +
+               @"                   _\  │" + Flag(countries[2])[4] + '\n' +
+                 $"  {teams[2]}    __/rd│" + Flag(countries[2])[5] + '\n' + Colors.White +
+                "───────────────────────┘");
+        }
+        public static void Anthem(int winner, int circuit, int userKey)
         {
             ConsoleKeyInfo key;
             Data data = new();
-            bool timeout = true;
-            int skip = 0;
-            string driverCountry, the = "", path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            if (winner < 20)
-                driverCountry = Data.DriverData()[winner].Item5;
-            else
-                driverCountry = data.UserData()[1].Item5;
-            Console.WriteLine(Colors.Gray + "Finish the race" + Colors.Dark + " [Enter]" + Colors.White);
-            Util.KeyAdvance(ConsoleKey.Enter);
+            bool timeout;
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, the = "",
+            driverCountry = winner == userKey ? data.UserData()[0].Item5 + "" : Data.DriverData()[winner].Item5,
+            driverWinner = winner == userKey ? data.UserData()[0].Item3 + "" : Data.DriverData()[winner].Item2;
             if (driverCountry == "United Kingdom" || driverCountry == "United States" || driverCountry == "Netherlands")
                 the = "the ";
-            Console.Write(Colors.White + "The winner is ");
-            if (winner < 20)
-                Console.WriteLine(Data.DriverData()[winner].Item2 + $"\nThe natonal anthem of {the}{driverCountry} is playing");
-            else
-                Console.WriteLine(data.UserData()[1].Item3 + $"\nThe natonal anthem of {the}{driverCountry} is playing");
+            Console.SetCursorPosition(42, 2);
+            Console.Write(Colors.Teams()[winner / 2] + $"{driverWinner}{Colors.White} is the winner of {Data.CircuitData()[circuit].Item5} GP");
+            Console.SetCursorPosition(42, 3);
+            Console.Write($"The natonal anthem of {the}{driverCountry} is playing");
+            BoxForLine();
+            Thread runningLine = new(new ThreadStart(RunningLine))
+            { IsBackground = true };
+            runningLine.Start();
             try
             {
-                using VorbisWaveReader reader = new(@$"{path}\Sound\{driverCountry}.ogg");
+                using VorbisWaveReader reader = new(@$"{path}\sound\{driverCountry.ToLower()}.ogg");
                 using WaveOutEvent waveOut = new();
                 waveOut.Init(reader);
                 waveOut.Play();
-                while (skip != 10)
+                for (int skip = 0; skip < 10;)
                 {
-                    Task.Delay(80).Wait();
+                    timeout = true;
+                    Task.Delay(68).Wait();
                     if (Console.KeyAvailable)
                     {
+                        ConsoleSemaphore.Wait();
                         key = Console.ReadKey(true);
+                        ConsoleSemaphore.Release();
                         if (key.Key == ConsoleKey.Spacebar)
                         {
                             skip++;
                             timeout = false;
                         }
+                        if (key.Key == ConsoleKey.UpArrow)
+                            waveOut.Volume = Math.Min(waveOut.Volume + 0.05f, 1);
+                        if (key.Key == ConsoleKey.DownArrow)
+                            waveOut.Volume = Math.Max(waveOut.Volume - 0.05f, 0);
                     }
-                    if (skip > 0 && timeout == true)
+                    if (skip > 0 && timeout)
                         skip--;
-                    Console.Write(Colors.Dark + "\rHold [Space] to skip");
-                    switch (skip)
+                    ConsoleSemaphore.Wait();
+                    if (waveOut.PlaybackState == NAudio.Wave.PlaybackState.Playing)
                     {
-                        case 0:
-                        case 1:
-                            Console.Write($"{Colors.Dark} ·····");
-                            break;
-                        case 2:
-                        case 3:
-                            Console.Write($"{Colors.White} ·{Colors.Dark}····");
-                            break;
-                        case 4:
-                        case 5:
-                            Console.Write($"{Colors.White} ··{Colors.Dark}···");
-                            break;
-                        case 6:
-                        case 7:
-                            Console.Write($"{Colors.White} ···{Colors.Dark}··");
-                            break;
-                        case 8:
-                        case 9:
-                            Console.Write($"{Colors.White} ····{Colors.Dark}·");
-                            break;
-                        case 10:
-                            Console.Write($"{Colors.White} ·····");
-                            break;
+                        Console.SetCursorPosition(42, 4);
+                        Console.Write(Colors.Dark + "Hold [Space] to skip");
+                        Assets.FillBar(skip);
                     }
+                    else
+                    {
+                        Console.SetCursorPosition(42, 4);
+                        Console.Write(Colors.Dark + "Press [Enter] to advance       ");
+                        ConsoleSemaphore.Release();
+                        Util.KeyAdvance(ConsoleKey.Enter);
+                        break;
+                    }
+                    ConsoleSemaphore.Release();
                     while (Console.KeyAvailable)
                         Console.ReadKey(false);
-                    timeout = true;
-                    if (skip == 10)
-                        waveOut.Dispose();
                 }
+                waveOut.Dispose();
             }
-            catch (Exception)
+            catch
             {
-                Console.WriteLine("No anthem available");
+                ConsoleSemaphore.Wait();
+                Console.SetCursorPosition(42, 4);
+                Console.Write($"{Colors.Gray}No anthem available {Colors.Dark}[Enter]");
+                ConsoleSemaphore.Release();
                 Util.KeyAdvance(ConsoleKey.Enter);
             }
-            Console.Clear();
+            StopRunningLine = true;
+            runningLine.Join();
+            Util.ClearPart(0);
         }
-    }
-    public class WeatherSet 
-    {
-        public static int DNFModifier(Weather weather)
+        public static void RunningLineStringBuilder(List<KeyValuePair<int, double>> lineup, int userKey, int fastestLap)
         {
-            int modifier = 0;
-            switch (weather)
+            StringBuilder runningLine = new();
+            string fl, driverSN;
+            Data data = new();
+            for (int i = 0; i < 20; i++)
             {
-                case Weather.Sunny:
-                    modifier = 350;
-                    break;
-                case Weather.PartlyCloudy:
-                    break;
-                case Weather.Cloudy:
-                    modifier = 100;
-                    break;
-                case Weather.SlightRain:
-                    modifier = 1000;
-                    break;
-                case Weather.ModerateRain:
-                    modifier = 2000;
-                    break;
-                case Weather.HeavyRain:
-                    modifier = 3500;
-                    break;
+                for (int j = 0; j < 20; j++)
+                {
+                    if (lineup[i].Key == Data.DriverData()[j].Item4)
+                    {
+                        driverSN = lineup[i].Key == userKey ? data.UserData()[0].Item4 + "" : Data.DriverData()[j].Item3;
+                        fl = lineup[i].Key == fastestLap ? "·" : " ";
+                        runningLine.Append("|" + (i + 1) + fl + driverSN + " " + TeamColorForRunningLine(j / 2) + "          ");
+                    }
+                }
             }
-            return modifier;
+            Line = runningLine.ToString();
         }
-        public enum Weather
+        static List<char> TeamColorChars => new() { '❶', '❷', '❸', '❹', '❺', '❻', '❼', '❽', '❾', '❿' };
+        static char TeamColorForRunningLine(int team) => TeamColorChars[team];
+        static string? Line { get; set; }
+
+        static readonly SemaphoreSlim ConsoleSemaphore = new(1, 1);
+        static bool StopRunningLine = false;
+        public static void BoxForLine()
         {
-            Sunny,
-            Cloudy,
-            PartlyCloudy,
-            SlightRain,
-            ModerateRain,
-            HeavyRain
+            Console.SetCursorPosition(41, 11);
+            Console.Write("┌──────────────────────────────────────────────────┐");
+            Console.SetCursorPosition(41, 12);
+            Console.Write("│                                                  │");
+            Console.SetCursorPosition(41, 13);
+            Console.Write("└──────────────────────────────────────────────────┘");
         }
-        public static Weather WeatherFormula(int circuitWeather)
+        public static void RunningLine()
         {
-            Weather weather;
-            Random rnd = new();
-            int weatherRnd = rnd.Next(100);
-            if (circuitWeather > weatherRnd)
+            string line = Line + "", displayLine;
+            int x = 0;
+            for (int i = 50; i > 0 || StopRunningLine; i--)
             {
-                int rainIntensity = rnd.Next(6);
-                if (rainIntensity == 0)
-                    weather = Weather.HeavyRain;
-                else if (rainIntensity < 3)
-                    weather = Weather.ModerateRain;
+                ConsoleSemaphore.Wait();
+                displayLine = new string(' ', Math.Max(i, 0)) + line.Remove(50 - i);
+                Console.SetCursorPosition(42, 12);
+                for (int j = 0; j < displayLine.Length; j++)
+                {
+                    if (displayLine[j] == '·')
+                        Console.Write(Colors.Magenta + displayLine[j] + Colors.White);
+                    else if (displayLine[j] == '|')
+                        Console.Write(Colors.Dark + displayLine[j] + Colors.White);
+                    else if (TeamColorChars.Contains(displayLine[j]))
+                        Console.Write(Colors.Teams()[TeamColorChars.IndexOf(displayLine[j])] + "■" + Colors.White);
+                    else
+                        Console.Write(Colors.White + displayLine[j]);
+                }
+                ConsoleSemaphore.Release();
+                Task.Delay(90).Wait();
+            }
+            while (!StopRunningLine)
+            {
+                ConsoleSemaphore.Wait();
+                displayLine = line.Remove(0, x);
+                if (displayLine.Length < 50)
+                    displayLine += line.Remove(50 - displayLine.Length);
                 else
-                    weather = Weather.SlightRain;
-            }
-            else
-            {
-                int sunnyOrCloudy = rnd.Next(3);
-                if (sunnyOrCloudy == 0)
-                    weather = Weather.Sunny;
-                else if (sunnyOrCloudy == 1)
-                    weather = Weather.PartlyCloudy;
+                    displayLine = displayLine.Remove(50);
+                Console.SetCursorPosition(42, 12);
+                for (int j = 0; j < displayLine.Length; j++)
+                {
+                    if (displayLine[j] == '·')
+                        Console.Write(Colors.Magenta + displayLine[j] + Colors.White);
+                    else if (displayLine[j] == '|')
+                        Console.Write(Colors.Dark + displayLine[j] + Colors.White);
+                    else if (TeamColorChars.Contains(displayLine[j]))
+                        Console.Write(Colors.Teams()[TeamColorChars.IndexOf(displayLine[j])] + "■" + Colors.White);
+                    else
+                        Console.Write(Colors.White + displayLine[j]);
+                }
+                ConsoleSemaphore.Release();
+                if (x == line.Length)
+                    x = 0;
                 else
-                    weather = Weather.Cloudy;
+                    x++;
+                Task.Delay(90).Wait();
             }
-            return weather;
-        }
-        public static void WeatherGraphics(Weather weather)
-        {
-            ConsoleKeyInfo key;
-            switch (weather)
-            {
-                case Weather.Sunny:
-                    Console.WriteLine(Colors.Sun + "      ____" + '\n' + "    .-    -.     " + Colors.White + "It's Sunny" + '\n' + Colors.Sun + @"   /        \" + '\n' + "  |          |" + '\n' + @"   \        /" + '\n' + "    '-____-'");
-                    break;
-                case Weather.PartlyCloudy:
-                    Console.WriteLine(Colors.Sun + $"      ____\n    .-    -.     {Colors.White}It's Partly Cloudy\n{Colors.Sun}   /    {Colors.LessGray}.--.{Colors.Sun}\\\n  |  {Colors.LessGray}.-(    ).{Colors.Sun}\n   \\{Colors.LessGray}(___.__)__)\n{Colors.Sun}    '-____-'");
-                    break;
-                case Weather.Cloudy:
-                    Console.WriteLine(Colors.LessGray +  "      .--.       " + Colors.White + "It's cloudy" + '\n' + Colors.LessGray + "   .-(    )." + '\n' + "  (___.__)__)");
-                    break;
-                case Weather.SlightRain:
-                    Console.WriteLine(Colors.LessGray +  "      .--.       " + Colors.White + "It's raining" + '\n' + Colors.LessGray + "   .-(    ).     " + Colors.White + $"Intensity: 1\n  {Colors.LessGray}(___.__)__)\n   {Colors.Rain} |  |  |");
-                    break;
-                case Weather.ModerateRain:
-                    Console.WriteLine(Colors.LessGray +  "      .--.       " + Colors.White + "It's raining" + '\n' + Colors.LessGray + "   .-(    ).     " + Colors.White + $"Intensity: 2\n  {Colors.LessGray}(___.__)__)\n   {Colors.Rain}| | | | |");
-                    break;
-                case Weather.HeavyRain:
-                    Console.WriteLine(Colors.LessGray +  "      .--.       " + Colors.White + "It's raining" + '\n' + Colors.LessGray + "   .-(    ).     " + Colors.White + $"Intensity: 3\n  {Colors.LessGray}(___.__)__)\n   {Colors.Rain}|||||||||");
-                    break;
-            }
-            Util.KeyAdvance(ConsoleKey.Escape);
         }
     }
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.CursorVisible = false;
-            Console.Write("\x1b[48;2;0;0;0m");
+            Thread disableCursorThread = new(new ThreadStart(DisableCursor))
+            { IsBackground = true };
+            disableCursorThread.Start();
+            Console.Write("\x1b[48;2;0;0;0m" + Colors.White);
             Console.Clear();
             Data.LoadDifficulty();
             Data data = new();
             data.UserData();
+            Debug.CheckFlag();
+            Util.ClearPart(0);
             Intro.IntroLogo();
             while (true)
             {
@@ -1010,6 +1304,64 @@ namespace F1_Season_2023_Ew
                 else if (mode == 4)
                     break;
                 Console.Clear();
+            }
+        }
+        static void DisableCursor()
+        {
+            while (true)
+            {
+                if (Console.CursorVisible == true)
+                    Console.CursorVisible = false;
+            }
+        }
+    }
+    public static class CareerManager
+    {
+        private static int CareerGP { get; set; }
+        public static List<CareerSave<int, int, WoxoTuple>> CareerMode { get; set; } = new();
+        public static void LoadCareer()
+        {
+            try
+            {
+                var userDataPath = Path.Combine(Environment.CurrentDirectory, "UserData");
+                var careerModePath = Path.Combine(userDataPath, "CareerMode.txt");
+                using var careerReader = new StreamReader(careerModePath);
+                CareerGP = Convert.ToInt32(careerReader.ReadLine());
+                foreach (var driverData in Data.DriverData())
+                {
+                    var points = Convert.ToInt32(careerReader.ReadLine());
+                    var winStrings = careerReader.ReadLine().Split(',');
+                    short[] wins = new short[10];
+                    for (int i = 0; i < 10; i++)
+                        wins[i] = Convert.ToInt16(winStrings[i]);
+                    CareerMode.Add(new CareerSave<int, int, WoxoTuple>(driverData.Item4, points, new WoxoTuple(wins[0], wins[1], wins[2], wins[3], wins[4], wins[5], wins[6], wins[7], wins[8], wins[9])));
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Can't load career save data\nCheck save directory or copy original [CareerMode.txt] from git");
+                Util.KeyAdvance(ConsoleKey.Enter);
+            }
+        }
+        public static void SaveCareer()
+        {
+            try
+            {
+                var userDataPath = Path.Combine(Environment.CurrentDirectory, "UserData");
+                var careerModePath = Path.Combine(userDataPath, "CareerMode.txt");
+                using var careerWriter = new StreamWriter(careerModePath);
+                careerWriter.WriteLine(CareerGP);
+                foreach (var careerSave in CareerMode)
+                {
+                    var winArray = new object[] { careerSave.Item3.F1, careerSave.Item3.F2, careerSave.Item3.F3, careerSave.Item3.F4, careerSave.Item3.F5, careerSave.Item3.F6, careerSave.Item3.F7, careerSave.Item3.F8, careerSave.Item3.F9, careerSave.Item3.F10 };
+                    var winString = string.Join(",", winArray); 
+                    careerWriter.WriteLine($"{careerSave.Item2}\n{winString}");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Can't save career save data\nCheck save directory or copy original [CareerMode.txt] from git");
+                Util.KeyAdvance(ConsoleKey.Enter);
             }
         }
     }

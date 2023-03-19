@@ -40,12 +40,12 @@ namespace F1_Season_2023_Ew
             Console.WriteLine("\n");
             if (stopwatch.ElapsedMilliseconds < 3 && key.Key == ConsoleKey.W)
             {
-                Console.Write($"False Start\nYou've been penalised with a 5 second penalty");
+                Console.Write($"{Colors.Teams()[2]}False Start\n{Colors.LessGray}You've been penalised with a 5 second penalty");
                 score = -6;
             }
             else if (key.Key != ConsoleKey.W)
             {
-                Console.Write($"You pressed the wrong button\nSpecifically [{key.Key}]");
+                Console.Write($"You pressed the wrong button\n{Colors.LessGray}Specifically [{key.Key}]");
                 score = -13;
             }
             else
@@ -133,12 +133,17 @@ namespace F1_Season_2023_Ew
                 Console.Write(Colors.Green + $"{stopwatch.ElapsedMilliseconds}ms");
                 score = 3;
             }
-            else if (stopwatch.ElapsedMilliseconds < 301 && key.Key == ConsoleKey.D)
+            else if (stopwatch.ElapsedMilliseconds < 286 && key.Key == ConsoleKey.D)
             {
                 Console.Write(Colors.Green + $"{stopwatch.ElapsedMilliseconds}ms");
                 score = 2;
             }
-            else if (stopwatch.ElapsedMilliseconds < 321 && key.Key == ConsoleKey.D)
+            else if (stopwatch.ElapsedMilliseconds < 301 && key.Key == ConsoleKey.D)
+            {
+                Console.Write(Colors.Green + $"{stopwatch.ElapsedMilliseconds}ms");
+                score = 1;
+            }
+            else if (stopwatch.ElapsedMilliseconds < 311 && key.Key == ConsoleKey.D)
             {
                 Console.Write(Colors.Teams()[3] + $"{stopwatch.ElapsedMilliseconds}ms");
                 score = 0;
@@ -165,7 +170,7 @@ namespace F1_Season_2023_Ew
             }
             else
             {
-                Console.Write($"\rYou pressed the wrong button\nSpecifically [{key.Key}]");
+                Console.Write($"\rYou pressed the wrong button\n{Colors.LessGray}Specifically [{key.Key}]");
                 score = -10;
             }
             Console.Write(Colors.Dark + " [Enter]");
@@ -202,8 +207,9 @@ namespace F1_Season_2023_Ew
         public static int Speed()
         {
             ConsoleKeyInfo key;
-            int speed = 0, change = 0, score, difficulty = Data.Difficulty * 200;
+            int speed = 0, change = 0, score, difficulty = Data.Difficulty * 4;
             Stopwatch stopwatch = new();
+            Stopwatch stopwatchBG = new();
             Random random = new();
             string color = Colors.Teams()[2], zeros = "000";
             var clues = new List<string> { "", "", "", "" };
@@ -227,19 +233,20 @@ namespace F1_Season_2023_Ew
                         break;
                 }
             }
-            var rndTime = new List<int> { random.Next(2400 - difficulty, 3600 + difficulty), random.Next(6700 - difficulty, 8800 + difficulty), random.Next(10500 - difficulty, 13500 + difficulty), 20000 };
-            Console.Write(Colors.White + $"I am Sp{clues[0]}e{clues[1]}e{clues[2]}e{clues[3]}e{Colors.White}d\n{Colors.Gray}Keys will light up randomly\nHold them down to accelerate" + Colors.Dark + " [Enter]\n\n" + Colors.Grayer +
+            var rndSwitch = new List<int> { random.Next(40 - difficulty, 75 + difficulty), random.Next(150 - difficulty, 225 + difficulty), random.Next(285 - difficulty, 315 + difficulty), 400 };
+            Console.Write(Colors.White + $"I am Sp{clues[0]}e{clues[1]}e{clues[2]}e{clues[3]}e{Colors.White}d\n{Colors.Gray}Keys will light up randomly\nPress them to accelerate" + Colors.Dark + " [Enter]\n\n" + Colors.Grayer +
                 "  ┌───┐  ┌───┐  ┌───┐  ┌───┐\n" +
                 "  │ Z │  │ X │  │ C │  │ V │\n" +
                 "  └───┘  └───┘  └───┘  └───┘\n\n" + Colors.White +
                $"Speed {Colors.Grayer}000 {Colors.White}KM/H");
             Util.KeyAdvance(ConsoleKey.Enter);
-            Console.SetCursorPosition(29, Console.CursorTop - 6);
+            Console.SetCursorPosition(25, Console.CursorTop - 6);
             Console.Write("         ");
             Console.SetCursorPosition(0, Console.CursorTop + 6);
-            stopwatch.Start();
-            while (stopwatch.Elapsed.Seconds < 16.4)
+            stopwatchBG.Start();
+            while (stopwatchBG.ElapsedMilliseconds / 27 <= 385)
             {
+                speed = (int)(stopwatch.ElapsedMilliseconds / 27);
                 switch (rndPattern[change])
                 {
                     case ConsoleKey.Z:
@@ -278,17 +285,20 @@ namespace F1_Season_2023_Ew
                 else
                     zeros = "";
                 Console.Write($"Speed {Colors.Grayer + zeros + color + speed + Colors.White} KM/H");
-                if (stopwatch.ElapsedMilliseconds > rndTime[change])
-                    change++;
+                if (stopwatchBG.ElapsedMilliseconds / 27 > rndSwitch[change])
+                { change = Math.Min(change + 1, 3); stopwatch.Stop(); color = Colors.Teams()[2]; }
                 if (Console.KeyAvailable)
                 {
+                    color = Colors.Green;
                     key = Console.ReadKey(true);
-                    if (key.Key == rndPattern[change] && stopwatch.ElapsedMilliseconds < rndTime[change])
-                    { speed++; color = Colors.Green; }
-                    else
-                    { speed = Math.Max(speed - 1, 0); color = Colors.Teams()[2]; }
+                    if (key.Key != rndPattern[change])
+                    { stopwatch.Stop(); color = Colors.Teams()[2]; }
+                    else if (key.Key == rndPattern[change] && stopwatch.IsRunning == false)
+                        stopwatch.Start();
                 }
             }
+            stopwatch.Stop();
+            stopwatchBG.Stop();
             if (speed > 354)
             {
                 score = 3;

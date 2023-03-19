@@ -31,7 +31,7 @@ namespace F1_Season_2023_Ew
                     circuitKeyList = new List<string> { "> ", "> ", "< ", "> ", "> ", "< ", "> ", "> ", "> ", "< ", "> ", "< ", "< ", "> ", "> ", "< ", "< ", "> ", "> ", "D " };
                     break;
                 case 7:
-                    circuitKeyList = new List<string> { "> ", "< ", "> ", "> ", "> ", "< ", "< ", "< ", "> ", "> ", "D ", "< ", "< ", "> ", "> ", "< ", "> ", "> ", "D " };
+                    circuitKeyList = new List<string> { "> ", "< ", "> ", "> ", "> ", "< ", "< ", "< ", "> ", "> ", "D ", "< ", "< ", "> ", "> ", "> ", "D " };
                     break;
                 case 8:
                     circuitKeyList = new List<string> { "< ", "> ", "> ", "< ", "> ", "< ", "> ", "D ", "> ", "< ", "> ", "< ", "D ", "> ", "> ", "< ", "D " };
@@ -85,10 +85,11 @@ namespace F1_Season_2023_Ew
         }
         public static void QLineup(List<KeyValuePair<int, double>> startingLineup, List<Tuple<int, int>> userChoice)
         {
+            Util.ClearKey();
             Console.Clear();
-            Console.Write("" + Colors.Gold + 
+            Console.WriteLine("" + Colors.White + 
                 "  ┌Pole\n" + 
-                " 1|\n" + Colors.White +
+                " 1|\n" + 
                 "  ┌\n" + 
                 " 2|\n" +
                 " 3|\n" +
@@ -99,69 +100,98 @@ namespace F1_Season_2023_Ew
                 " 8|\n" +
                 " 9|\n" +
                 "10|\n" + Colors.Teams()[2] +
-               $"  ┌E{Colors.Gray}liminated {Colors.Teams()[2]}Q{Colors.Gray}2\n" +
-               $"11{Colors.Teams()[2]}|\n" + Colors.Gray +
-               $"12{Colors.Teams()[2]}|\n" + Colors.Gray +
-               $"13{Colors.Teams()[2]}|\n" + Colors.Gray +
-               $"14{Colors.Teams()[2]}|\n" + Colors.Gray +
+               $"  ┌{Colors.Gray}Eliminated {Colors.Teams()[2]}Q{Colors.Gray}2\n" + Colors.LessGray +
+               $"11{Colors.Teams()[2]}|\n" + Colors.LessGray +
+               $"12{Colors.Teams()[2]}|\n" + Colors.LessGray +
+               $"13{Colors.Teams()[2]}|\n" + Colors.LessGray +
+               $"14{Colors.Teams()[2]}|\n" + Colors.LessGray +
                $"15{Colors.Teams()[2]}|\n" + Colors.Teams()[2] +
-               $"  ┌E{Colors.Gray}liminated {Colors.Teams()[2]}Q{Colors.Gray}1\n" + 
+               $"  ┌{Colors.Gray}Eliminated {Colors.Teams()[2]}Q{Colors.Gray}1\n" + 
                $"16{Colors.Teams()[2]}|\n" + Colors.Gray +
                $"17{Colors.Teams()[2]}|\n" + Colors.Gray +
                $"18{Colors.Teams()[2]}|\n" + Colors.Gray +
                $"19{Colors.Teams()[2]}|\n" + Colors.Gray +
                $"20{Colors.Teams()[2]}|");
             Data data = new();
-            ConsoleKeyInfo key;
-            int number = 20, delay = 1;
-            Console.Write('\r');
-            for (int n = 19; n > -1; n--)
+            var gridList = new List<string>();
+            for (int n = 0; n < 20; n++)
             {
-                for (int j = 19; j > -1; j--)
+                for (int j = 0; j < 20; j++)
                 {
                     if (startingLineup[n].Key == Data.DriverData()[j].Item4)
                     {
-                        for (int i = 234; i < 255; i += 2)
+                        string space = " ";
+                        if (j == userChoice[0].Item1)
                         {
-                            if (Console.KeyAvailable)
-                            {
-                                key = Console.ReadKey(true);
-                                if (key.Key == ConsoleKey.Spacebar)
-                                {
-                                    i = 255;
-                                    delay = 0;
-                                }
-                            }
-                            if (number > 15)
-                                Console.Write(Colors.Gray);
-                            else if (number == 1)
-                                Console.Write(Colors.Gold);
-                            else if (number > 10)
-                                Console.Write(Colors.LessGray);
-                            else
-                                Console.Write(Colors.White);
-                            if (number < 10)
-                                Console.Write(" ");
-                            if (j == userChoice[0].Item1)
-                                Console.WriteLine(number + Colors.Teams()[j / 2] + '|' + $"\x1b[38;5;{i}m" + data.UserData()[1].Item3 + Colors.Teams()[j / 2] + " <");
-                            else
-                                Console.WriteLine(number + Colors.Teams()[j / 2] + '|' + $"\x1b[38;5;{i}m" + Data.DriverData()[j].Item2);
-                            if (i < 254)
-                                Console.SetCursorPosition(0, Console.CursorTop - 1);
-                            Task.Delay(delay).Wait();
+                            if (userChoice[0].Item2 < 10)
+                                space = "  ";
+                            gridList.Add(Colors.Teams()[j / 2] + "|☺" + data.UserData()[0].Item4 + Colors.Teams()[j / 2] + space + userChoice[0].Item2 + Colors.Darker + "☺ " + data.UserData()[0].Item3 + Colors.Teams()[j / 2] + " <");
                         }
-                        if (number == 16 || number == 11 || number == 2) 
-                            Console.SetCursorPosition(0, Console.CursorTop - 1);
-                        Console.SetCursorPosition(0, Console.CursorTop - 2);
-                        break;
+                        else
+                        {
+                            if (Data.DriverData()[j].Item4 < 10)
+                                space = "  ";
+                            gridList.Add(Colors.Teams()[j / 2] + "|☺" + Data.DriverData()[j].Item3 + Colors.Teams()[j / 2] + space + Data.DriverData()[j].Item4 + Colors.Darker + "☺ " + Data.DriverData()[j].Item2);
+                        }
                     }
                 }
-                number--;
             }
-            do
+            for (int i = 0; i < 4; i++)
             {
-                key = Console.ReadKey(true);
-            } while (key.Key != ConsoleKey.Enter);
+                switch (i)
+                {
+                    case 0:
+                        Console.SetCursorPosition(2, 19);
+                        break;
+                    case 1:
+                        Console.SetCursorPosition(2, 13);
+                        break;
+                    case 2:
+                        Console.SetCursorPosition(2, 3);
+                        break;
+                    case 3:
+                        Console.SetCursorPosition(2, 1);
+                        break;
+                }
+                for (int fade = 234; fade < 255; fade++)
+                {
+                    if (i < 2)
+                    {
+                        for (int j = 15; j < 20; j++)
+                        {
+                            Console.WriteLine(GridString(gridList[j - i * 5], fade));
+                            Console.SetCursorPosition(2, Console.CursorTop);
+                        }
+                        Console.SetCursorPosition(2, Console.CursorTop - 5);
+                    }
+                    else if (i == 2)
+                    {
+                        for (int j = 1; j < 10; j++)
+                        {
+                            Console.WriteLine(GridString(gridList[j], fade));
+                            Console.SetCursorPosition(2, Console.CursorTop);
+                        }
+                        Console.SetCursorPosition(2, Console.CursorTop - 9);
+                    }
+                    else if (i == 3)
+                    {
+                        Console.Write(GridString(gridList[0], fade));
+                        Console.SetCursorPosition(2, Console.CursorTop);
+                    }
+                    Task.Delay(2).Wait();
+                }
+                Task.Delay(200).Wait();
+            }
+            Console.Write('\r');
+            Util.ClearKey();
+            Util.KeyAdvance(ConsoleKey.Enter);
+        }
+        public static string GridString(string grid, int fadeColor)
+        {
+            string gridDriver;
+            string[] gridArray = grid.Split('☺');
+            gridDriver = gridArray[0] + $"\x1b[38;5;{fadeColor}m" + gridArray[1] + $"\x1b[38;5;{fadeColor - 2}m" + gridArray[2];
+            return gridDriver;
         }
     }
     public static class QPlayOrSkip
