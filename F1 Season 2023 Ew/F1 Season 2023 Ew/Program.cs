@@ -2458,6 +2458,7 @@ namespace F1_Season_2023_Ew
             Data.LoadDifficulty();
             Data data = new();
             data.UserData();
+            Util.ClearPart(0);
             Intro.IntroLogo();
             while (true)
             {
