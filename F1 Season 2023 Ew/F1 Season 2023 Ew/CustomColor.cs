@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace CustomColor
+namespace F1_Season_2023_Ew
 {
     public static class CustomColor
     {
