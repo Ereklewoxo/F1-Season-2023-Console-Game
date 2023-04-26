@@ -1745,6 +1745,11 @@ namespace F1_Season_2023_Ew
                         selectedOption = true;
                     else if (key.Key == ConsoleKey.RightArrow)
                         selectedOption = false;
+                    else if (key.Key == ConsoleKey.Escape)
+                    {
+                        selectedOption = false;
+                        break;
+                    }
                 } while (key.Key != ConsoleKey.Enter);
             }
             return selectedOption;
@@ -1775,7 +1780,7 @@ namespace F1_Season_2023_Ew
             CareerManager.LoadCareer();
             List<Tuple<int, int>> userTeamNumber = new();
             bool backToMainMenu = false;
-            if (CareerManager.UserNumber == 0)
+            if (CareerManager.UserNumber is 0)
             {
                 userTeamNumber = TeamSelector.TeamListing();
                 CareerManager.UserKey = userTeamNumber[0].Item1;
@@ -1786,12 +1791,15 @@ namespace F1_Season_2023_Ew
                 CareerManager.LoadGrandPrixStats();
                 userTeamNumber.Add(new Tuple<int, int>(CareerManager.UserKey, CareerManager.UserNumber));
                 var key = CareerMenu(userTeamNumber[0].Item1, CareerManager.CareerGP - 1, SortDrivers, SortConstructors());
-                if (key == ConsoleKey.Escape)
+                if (key is ConsoleKey.Escape)
                     backToMainMenu = true;
             }
             int userKey = CareerManager.UserKey; 
             for (int circuit = CareerManager.CareerGP; circuit < Data.CircuitData().Count && !backToMainMenu; circuit++)
             {
+                Util.ClearPart(0);
+                ASCIITextConverter($"{Data.CircuitData()[circuit].Item5} GP", 5, Colors.Teams(userKey / 2));
+                Task.Delay(1000).Wait();
                 Active = true;
                 RaceSetup.CareerRace(circuit, userTeamNumber, userKey);
                 Active = false;
@@ -1803,7 +1811,7 @@ namespace F1_Season_2023_Ew
                 var sortedPoints = SortDrivers;
                 var sortedConstructors = SortConstructors();
                 var key = CareerMenu(userKey, circuit, sortedPoints, sortedConstructors);
-                if (key == ConsoleKey.Escape)
+                if (key is ConsoleKey.Escape)
                     break;
             }
         }
@@ -2075,7 +2083,35 @@ namespace F1_Season_2023_Ew
             {
                 Console.Write($"Next {Colors.Teams(userKey / 2)}>{Colors.Text} {Data.CircuitData()[CareerManager.CareerGP].Item5} GP");
                 Console.SetCursorPosition(45, Console.CursorTop);
-                Console.Write($"{Colors.Rain}Rain > {Data.CircuitData()[CareerManager.CareerGP].Item6}%");
+                Console.WriteLine($"{Colors.Rain}Rain > {Data.CircuitData()[CareerManager.CareerGP].Item6}%");
+            }
+            if (CheckIfTheresChampion != null)
+            {
+                Console.SetCursorPosition(2, Console.CursorTop + 1);
+                for (int i = 0; i < Data.DriverData().Count; i++)
+                {
+                    if (Data.DriverData()[i].Item4 == CheckIfTheresChampion)
+                    {
+                        if (i == userKey)
+                            Console.WriteLine($"{Colors.Teams(i / 2) + '|' + Colors.Text + data.UserData()[0].Item3 + Colors.Teams(i / 2) + ' ' + CareerManager.UserNumber + Colors.Text}, You are The World Champion! Congratulations!");
+                        else 
+                            Console.WriteLine($"{Colors.Teams(i / 2) + '|' + Colors.Text + Data.DriverData()[i].Item2 + Colors.Teams(i / 2) + ' ' + Data.DriverData()[i].Item4 + Colors.Text} is The World Champion");
+                    }
+                }
+            }
+            if (CheckIfTheresChampionConstructor != null)
+            {
+                Console.SetCursorPosition(3, Console.CursorTop + 1);
+                for (int i = 0; i < Data.TeamList().Count; i++)
+                {
+                    if (i == CheckIfTheresChampionConstructor)
+                    {
+                        if (i == userKey / 2)
+                            Console.WriteLine($"{Colors.Text}We, {Colors.Teams(i) + Data.TeamList()[i].TrimEnd() + Colors.Text}, are The World Champions!");
+                        else
+                            Console.WriteLine($"{Colors.Teams(i) + Data.TeamList()[i].TrimEnd() + Colors.Text} is The World Champion");
+                    }
+                }
             }
             do
             {
@@ -2354,6 +2390,12 @@ namespace F1_Season_2023_Ew
             Util.ClearKey();
             CareerManager.GrandPrixStats = grandPrixStats;
         }
+        public static int? CheckIfTheresChampion =>
+            SortDrivers[0].Points > SortDrivers[1].Points + 26 * (Data.CircuitData().Count - CareerManager.CareerGP) 
+            ? SortDrivers[0].Number : null;
+        public static int? CheckIfTheresChampionConstructor =>
+            SortConstructors()[0].Item2 > SortConstructors()[1].Item2 + 51 * (Data.CircuitData().Count - CareerManager.CareerGP)
+            ? SortConstructors()[0].Item1 : null;
         public static void ClearGraph(int left, int top)
         {
             for (int i = 0; i < 20; i++)

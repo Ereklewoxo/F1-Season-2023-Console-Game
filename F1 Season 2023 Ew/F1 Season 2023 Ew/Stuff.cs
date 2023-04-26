@@ -99,6 +99,85 @@ namespace F1_Season_2023_Ew
     }
     public class Assets
     {
+        public static void ASCIITextConverter(string word, int delay, string color)
+        {
+            word = word.ToUpper();
+            int asciiLength = 0;
+            foreach (char letter in word)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    if (Convert.ToInt32(letter) - 65 is >= 0 and < 26)
+                    {
+                        Console.Write(Colors.Darker + ASCIICharacters[Convert.ToInt32(letter) - 65][i]);
+                        asciiLength = ASCIICharacters[Convert.ToInt32(letter) - 65][i].Length;
+                        Console.SetCursorPosition(Console.CursorLeft - asciiLength, Console.CursorTop + 1);
+                    }
+                    else
+                    {
+                        Console.Write(ASCIICharacters[26][i]);
+                        asciiLength = ASCIICharacters[26][i].Length;
+                        Console.SetCursorPosition(Console.CursorLeft - asciiLength, Console.CursorTop + 1);
+                    }
+                }
+                Console.SetCursorPosition(Console.CursorLeft + asciiLength, Console.CursorTop - 6);
+            }
+            Console.Write('\r');
+            foreach (char letter in word)
+            {
+                for (int i = 0; i < 6; i++)
+                {   
+                    if (Convert.ToInt32(letter) - 65 is >= 0 and < 26)
+                    {
+                        Console.Write(Colors.Gray + ASCIICharacters[Convert.ToInt32(letter) - 65][i]);
+                        asciiLength = ASCIICharacters[Convert.ToInt32(letter) - 65][i].Length;
+                        Console.SetCursorPosition(Console.CursorLeft - asciiLength, Console.CursorTop);
+                        Task.Delay(delay * 2).Wait();
+                        Console.Write(color + ASCIICharacters[Convert.ToInt32(letter) - 65][i]);
+                        Console.SetCursorPosition(Console.CursorLeft - asciiLength, Console.CursorTop + 1);
+                        Task.Delay(delay).Wait();
+                    }
+                    else
+                    {
+                        Console.Write(ASCIICharacters[26][i]);
+                        asciiLength = ASCIICharacters[26][i].Length;
+                        Console.SetCursorPosition(Console.CursorLeft - asciiLength, Console.CursorTop + 1);
+                        Task.Delay(delay).Wait();
+                    }
+                }
+                Console.SetCursorPosition(Console.CursorLeft + asciiLength, Console.CursorTop - 6);
+            }
+        }
+        private static List<List<string>> ASCIICharacters => new()
+        {
+            new List<string>() { "░█████╗░", "██╔══██╗", "███████║", "██╔══██║", "██║░░██║", "╚═╝░░╚═╝" },
+            new List<string>() { "██████╗░", "██╔══██╗", "██████╦╝", "██╔══██╗", "██████╦╝", "╚═════╝░"},
+            new List<string>() { "░█████╗░", "██╔══██╗", "██║░░╚═╝", "██║░░██╗", "╚█████╔╝", "░╚════╝░"},
+            new List<string>() { "██████╗░", "██╔══██╗", "██║░░██║", "██║░░██║", "██████╔╝", "╚═════╝░"},
+            new List<string>() { "███████╗", "██╔════╝", "█████╗░░", "██╔══╝░░", "███████╗", "╚══════╝"},
+            new List<string>() { "███████╗", "██╔════╝", "█████╗░░", "██╔══╝░░", "██║░░░░░", "╚═╝░░░░░"},
+            new List<string>() { "░██████╗░", "██╔════╝░", "██║░░██╗░", "██║░░╚██╗", "╚██████╔╝", "░╚═════╝░"},
+            new List<string>() { "██╗░░██╗", "██║░░██║", "███████║", "██╔══██║", "██║░░██║", "╚═╝░░╚═╝"},
+            new List<string>() { "██╗", "██║", "██║", "██║", "██║", "╚═╝"},
+            new List<string>() { "░░░░░██╗", "░░░░░██║", "░░░░░██║", "██╗░░██║", "╚█████╔╝", "░╚════╝░"},
+            new List<string>() { "██╗░░██╗", "██║░██╔╝", "█████═╝░", "██╔═██╗░", "██║░╚██╗", "╚═╝░░╚═╝"},
+            new List<string>() { "██╗░░░░░", "██║░░░░░", "██║░░░░░", "██║░░░░░", "███████╗", "╚══════╝"},
+            new List<string>() { "███╗░░░███╗", "████╗░████║", "██╔████╔██║", "██║╚██╔╝██║", "██║░╚═╝░██║", "╚═╝░░░░░╚═╝"},
+            new List<string>() { "███╗░░██╗", "████╗░██║", "██╔██╗██║", "██║╚████║", "██║░╚███║", "╚═╝░░╚══╝"},
+            new List<string>() { "░██████╗░", "██╔═══██╗", "██║░░░██║", "██║░░░██║", "╚██████╔╝", "░╚═════╝░"},
+            new List<string>() { "██████╗░", "██╔══██╗", "██████╔╝", "██╔═══╝░", "██║░░░░░", "╚═╝░░░░░"},
+            new List<string>() { "░██████╗░", "██╔═══██╗", "██║██╗██║", "╚██████╔╝", "░╚═██╔═╝░", "░░░╚═╝░░░"},
+            new List<string>() { "██████╗░", "██╔══██╗", "██████╔╝", "██╔══██╗", "██║░░██║", "╚═╝░░╚═╝"},
+            new List<string>() { "░██████╗", "██╔════╝", "╚█████╗░", "░╚═══██╗", "██████╔╝", "╚═════╝░"},
+            new List<string>() { "████████╗", "╚══██╔══╝", "░░░██║░░░", "░░░██║░░░", "░░░██║░░░", "░░░╚═╝░░░"},
+            new List<string>() { "██╗░░░██╗", "██║░░░██║", "██║░░░██║", "██║░░░██║", "╚██████╔╝", "░╚═════╝░"},
+            new List<string>() { "██╗░░░██╗", "██║░░░██║", "╚██╗░██╔╝", "░╚████╔╝░", "░░╚██╔╝░░", "░░░╚═╝░░░"},
+            new List<string>() { "░██╗░░░░░░░██╗", "░██║░░██╗░░██║", "░╚██╗████╗██╔╝", "░░████╔═████║░", "░░╚██╔╝░╚██╔╝░", "░░░╚═╝░░░╚═╝░░"},
+            new List<string>() { "██╗░░██╗", "╚██╗██╔╝", "░╚███╔╝░", "░██╔██╗░", "██╔╝╚██╗", "╚═╝░░╚═╝"},
+            new List<string>() { "██╗░░░██╗", "╚██╗░██╔╝", "░╚████╔╝░", "░░╚██╔╝░░", "░░░██║░░░", "░░░╚═╝░░░"},
+            new List<string>() { "███████╗", "╚════██║", "░░███╔═╝", "██╔══╝░░", "███████╗", "╚══════╝"},
+            new List<string>() { "    ", "    ", "    ", "    ", "    ", "    " }
+        };
         public static void FillBar(int skip)
         {
             switch (skip)
